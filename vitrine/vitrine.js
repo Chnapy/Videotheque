@@ -2,6 +2,7 @@
 var collection = [];
 var sagas;
 var fiche_id = -1;
+var is_loadAll = false;
 
 var sc_error_HTML = '<span class="fui-cross"></span>';
 
@@ -271,13 +272,14 @@ function Oeuvre(json) {
 function loadall() {
 	collection = [];
 	sagas = [];
+	is_loadAll = true;
 	$("#load_btn").hide();
 	$('.content-header-top-title').show();
 	$("#content-body").html("");
 	$('.load-oeuvre').addClass('load');
 
 	myPost("index.php", {m: "items", f: "init"}, function (data) {
-		if(data === false) {
+		if (data === false) {
 			errorAlert("Le fichier de données de la bibliothèque semble inaccessible. Vérifiez vos paramètres de chemins.");
 		}
 		$('.nbr_oeuvres').html('0/');
@@ -292,19 +294,36 @@ function load(i, tab) {
 		$('.load-oeuvre').removeClass('load');
 		return;
 	}
-	myPost("index.php", {m: "items", f: "load", id: tab[i]}, function (data) {
-		loadItem(data);
+	loadOeuvre(tab[i], function () {
 		$('.nbr_oeuvres').html((i + 1) + '/');
 		load(i + 1, tab);
+	});
+//	myPost("index.php", {m: "items", f: "load", id: tab[i]}, function (data) {
+//		loadItem(data);
+//		$('.nbr_oeuvres').html((i + 1) + '/');
+//		load(i + 1, tab);
+//	}, "json");
+}
+
+function loadOeuvre(id, func) {
+//	if(collection[id] != null)
+//		return false;
+	myPost("index.php", {m: "items", f: "load", id: id}, function (data) {
+		loadItem(data);
+		if (func) {
+			func();
+		}
 	}, "json");
 }
 
 function loadItem(item) {
 	var oeuvre = new Oeuvre(item);
+	var isset = collection[oeuvre.id] != null;
 	collection[oeuvre.id] = oeuvre;
-	add_options(oeuvre);
-//	console.debug(oeuvre);
-	addOeuvre(oeuvre);
+	if (!isset) {
+		add_options(oeuvre);
+		addOeuvre(oeuvre);
+	}
 }
 
 function addOeuvre(o) {

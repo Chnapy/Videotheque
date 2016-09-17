@@ -1,6 +1,7 @@
 {
 	"first_use": true,
 	"load_auto": false,
+	"curl_timeout": 30000,
 	"biblio_path": "",
 	"biblio_cfg_path": "data\/biblio.json",
 	"vlc_path": "",

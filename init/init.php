@@ -1,5 +1,7 @@
 <?php
 
+use thcolin\SensCritiqueAPI\Client;
+
 switch ($_POST['f']) {
 	case "scan":
 		scan();
@@ -129,22 +131,27 @@ function ajout() {
 
 	switch ($type) {
 		case "film":
-			$success = BIBLIO::addFilm($path, $langues, $sub, $sc);
+			$ret = BIBLIO::addFilm($path, $langues, $sub, $sc);
 			break;
 		case "serie":
 //			if (!is_numeric($saison)) {
 //				$success = false;
 //			} else {
-			$success = BIBLIO::addSerie($path, $langues, $sub, $sc, $saison);
+			$ret = BIBLIO::addSerie($path, $langues, $sub, $sc, $saison);
 //			}
 			break;
 		default:
-			$success = false;
+			$ret = false;
+			break;
 	}
 
-	echo json_encode(array(
-		"success" => $success
-	));
+	if (!$ret) {
+		echo json_encode(array(
+			"success" => false
+		));
+	} else {
+		echo json_encode($ret);
+	}
 }
 
 function open() {
@@ -173,6 +180,8 @@ function params() {
 		case 'param':
 			CFG::$cfg['load_auto'] = (isset($form['load_auto']) && $form['load_auto'] === 'on');
 			CFG::$cfg['sc_check_interval'] = intval($form['sc_interval']);
+			CFG::$cfg['curl_timeout'] = intval($form['curl_timeout']);
+			Client::setTimeout(CFG::$cfg['curl_timeout']);
 			CFG::$cfg['curseur_load'] = (isset($form['curseur_load']) && $form['curseur_load'] === 'on');
 			if (isset($form['filtre_pos'])) {
 				CFG::$cfg['filtre_pos'] = intval($form['filtre_pos']);
@@ -197,7 +206,7 @@ function params() {
 			break;
 		case 'config':
 			$content = $form['content'];
-			if($content != null && strlen(trim($content)) > 0) {
+			if ($content != null && strlen(trim($content)) > 0) {
 				CFG::setAllContent($content, 'APPROUVE');
 			}
 			break;

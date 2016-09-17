@@ -104,6 +104,16 @@ function init() {
 		});
 	});
 
+	$('#form_scan').on('submit', function (e) {
+		e.preventDefault();
+		if ($('#form_scan input[name=sc]').val().length <= 0
+				|| $('#form_scan input[name=path]').val().length <= 0) {
+			return;
+		}
+
+		send($(this));
+	});
+
 	initFiltre();
 	initExplorer();
 }
@@ -252,7 +262,7 @@ function scan() {
 
 			$('#table_body').append(" \n\
 				<tr id='item" + item["id"] + "'>\n\
-				<td><label class='checkbox' for='r" + item["id"] + "'><input id='r" + item["id"] + "' type='radio' name='cb_item' onchange='checke(\"" + item["path"] + "\");' data-toggle='radio' class='custom-radio'></label></td>\n\
+				<td><label class='checkbox' for='r" + item["id"] + "'><input id='r" + item["id"] + "' type='radio' name='cb_item' onchange='checke(\"" + item["path"].replace(/'/g, '&apos;').replace(/"/g, '&quot;') + "\");' data-toggle='radio' class='custom-radio'></label></td>\n\
 				<td><label for='r" + item["id"] + "'><span class='gog-table-title'>" + item['name'] + "</span><span class='gog-table-details'>" + item['path'] + "</span></label></td>\n\
 				<td><label for='r" + item["id"] + "'><span class='gog-table-title'>" + item['ext'].toUpperCase() + "</span></label></td>\n\
 				<td><span class='fui-folder a gog-btn explorer' data-path='" + dir + "'></span></td>\n\
@@ -270,15 +280,6 @@ function scan() {
 //				$(radio).radiocheck('check');
 //		});
 
-		$('#form_scan').on('submit', function (e) {
-			e.preventDefault();
-			if ($('#form_scan input[name=sc]').val().length <= 0
-					|| $('#form_scan input[name=path]').val().length <= 0) {
-				return;
-			}
-
-			send($(this));
-		});
 	}, "json");
 }
 
@@ -302,6 +303,9 @@ function send(form) {
 			$('#form_scan').hide();
 			$('#control_scan').hide();
 			scan();
+			if (is_loadAll) {
+				loadOeuvre(data.id);
+			}
 		} else {
 			errorAlert("Ajout échoué");
 		}

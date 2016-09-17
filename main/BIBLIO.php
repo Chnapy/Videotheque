@@ -76,7 +76,15 @@ class BIBLIO {
 			'sub' => $sub,
 			'sc' => $sc);
 
-		return self::submit();
+		if (!self::submit()) {
+			return false;
+		}
+		$id = self::$last_id;
+
+		return array(
+			"success" => true,
+			"id" => $id
+		);
 	}
 
 	static function addSerie($path, $langues, $sub, $sc, $saison) {
@@ -97,7 +105,15 @@ class BIBLIO {
 					'langues' => $langues,
 					'sub' => $sub
 				);
-				return self::submit();
+
+				if (!self::submit()) {
+					return false;
+				}
+				$id = self::$biblio[$i]['id'];
+				return array(
+					"success" => true,
+					"id" => $id
+				);
 			}
 		}
 
@@ -113,7 +129,15 @@ class BIBLIO {
 				)
 		));
 
-		return self::submit();
+		if (!self::submit()) {
+			return false;
+		}
+		$id = self::$last_id;
+
+		return array(
+			"success" => true,
+			"id" => $id
+		);
 	}
 
 	private static function submit() {

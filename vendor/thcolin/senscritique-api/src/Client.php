@@ -37,14 +37,21 @@ class Client {
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_HTTPHEADER => array(
 				'X-Requested-With:XMLHttpRequest'
-			)
+			),
+			CURLOPT_CONNECTTIMEOUT_MS => CFG::$cfg['curl_timeout']
 		);
 
 		self::$OPTIONS_NORMAL = array(CURLOPT_COOKIEJAR => realpath($cookie_path),
 			CURLOPT_COOKIEFILE => realpath($cookie_path),
 			CURLOPT_COOKIESESSION => true,
 			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_CONNECTTIMEOUT_MS => CFG::$cfg['curl_timeout']
 		);
+	}
+	
+	public static function setTimeout($timeout_ms) {
+		self::$OPTIONS_AJAX[CURLOPT_CONNECTTIMEOUT_MS] = $timeout_ms;
+		self::$OPTIONS_NORMAL[CURLOPT_CONNECTTIMEOUT_MS] = $timeout_ms;
 	}
 
 	public function getUser($username) {

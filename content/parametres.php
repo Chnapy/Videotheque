@@ -17,6 +17,9 @@
 								</i>
 							</td>
 						</tr>
+						<tr><td class="gog-td-label">Timeout des requêtes Senscritique, en ms (ou 0 pour aucune limite de temps)</td>
+							<td><input type="number" name="curl_timeout" class="gog-input" required value=<?php echo CFG::$cfg['curl_timeout']; ?>></td>
+						</tr>
 						<tr><td class="gog-td-label">Interval test de réponse Senscritique, en ms (ou 0 pour ne pas effectuer de test)</td>
 							<td><input type="number" name="sc_interval" class="gog-input" required value=<?php echo CFG::$cfg['sc_check_interval']; ?>></td>
 						</tr>
