@@ -198,11 +198,11 @@ function params() {
 			CFG::$cfg['vlc_params']['crop'][3] = intval($form['crop3']);
 			break;
 		case 'path':
-			CFG::$cfg['biblio_path'] = $form['biblio_path'];
-			CFG::$cfg['biblio_cfg_path'] = $form['biblio_cfg_path'];
-			CFG::$cfg['vlc_path'] = $form['vlc_path'];
-			CFG::$cfg['explorer_path'] = $form['explorer_path'];
-			CFG::$cfg['cookie_path'] = $form['cookie_path'];
+			CFG::$cfg['biblio_path'] = CFG::parsePath($form['biblio_path']);
+			CFG::$cfg['biblio_cfg_path'] = CFG::parsePath($form['biblio_cfg_path']);
+			CFG::$cfg['vlc_path'] = CFG::parsePath($form['vlc_path']);
+			CFG::$cfg['explorer_path'] = CFG::parsePath($form['explorer_path']);
+			CFG::$cfg['cookie_path'] = CFG::parsePath($form['cookie_path']);
 			break;
 		case 'config':
 			$content = $form['content'];
