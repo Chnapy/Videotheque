@@ -1,0 +1,314 @@
+
+.oeuvre {
+	display: inline-block;
+    position: relative;
+    height: 110px;
+	width: 600px;
+    padding-right: 10px;
+    font-size: 13px;
+    color: #262626;
+    overflow: hidden;
+	background: #e1e1e1;
+	box-shadow: 0 1px 5px rgba(0,0,0,.15);
+	margin: 30px 15px;
+	margin-bottom: 0;
+	text-align: left;
+	-webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+	cursor: pointer;
+}
+
+.fiche-open .oeuvre.fadein
+
+.oeuvre:hover {
+	background: #e5e5e5;
+}
+
+#all.fiche-open .oeuvre {
+	opacity: 0;
+	animation: none;
+    -moz-animation: none; /* Firefox */
+    -webkit-animation: none; /* Safari et Chrome */
+    -o-animation: none;
+}
+
+.o-border {
+	position: absolute;
+	right: 0;
+	top: 0;
+	height: 100%;
+	width: 0;
+	border-right: 3px solid transparent;
+	border-left: 3px solid transparent;
+}
+
+.o-real {
+	position: absolute;
+	left: 90px;
+	top: 30px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	max-width: 400px;
+    white-space: nowrap;
+}
+
+.o-tags {
+	position: absolute;
+	left: 90px;
+	bottom: 5px;
+	text-overflow: clip;
+	overflow: hidden;
+	max-width: 400px;
+    white-space: nowrap;
+}
+
+.o-saga {
+	position: absolute;
+	right: 10px;
+	top: 35px;
+	text-transform: uppercase;
+}
+
+.o-no-file {
+	color: red;
+}
+
+.oeuvre .o-no-file {
+	position: absolute;
+	right: 72px;
+	top: 40px;
+}
+
+.o-clickable {
+	display: block;
+    height: 100%;
+	width: 100%;
+    overflow: hidden;
+    color: inherit;
+	cursor: pointer;
+}
+
+.o-affiche {
+	float: left;
+	height: 100%;
+	width: 80px;
+	margin-right: 10px;
+}
+
+.o-affiche img {
+    max-width: 80px;
+    height: 100%;
+}
+
+.oeuvre:hover .o-affiche img {
+	opacity: .95;
+}
+
+.o-nom {
+	margin-top: 13px;
+	line-height: 16px;
+	display: inline-block;
+    position: relative;
+    font-size: 1em;
+    font-weight: 600;
+    white-space: nowrap;
+    color: #262626;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	max-width: 360px;
+}
+
+.o-annee {
+	display: inline-block;
+	line-height: 16px;
+    font-size: .8461538462em;
+	font-weight: 300;
+	color: inherit;
+	overflow: hidden;
+}
+
+.o-saisons {
+	display: inline-block;
+	margin-right: 5px;
+}
+
+.o-duree {
+	display: inline-block;
+	margin-top: 20px;
+	margin-right: 5px;
+}
+
+.o-langues {
+	display: inline-block;
+	margin-right: 5px;
+}
+
+.o-sub {
+	display: inline-block;
+}
+
+.o-langues .label {
+	margin-top: -3px;
+}
+
+.o-types {
+	position: absolute;
+	top: 8px;
+	right: 10px;
+	color: #f2f2f2;
+	text-transform: uppercase;
+}
+
+.o-type {
+	font-weight: normal !important;
+	font-size: 100% !important;
+	display: inline-block;
+    background: #788795;
+    border-radius: 2px;
+    text-align: center;
+}
+
+.o-type2 {
+	font-weight: normal !important;
+	font-size: 100% !important;
+	display: inline-block;
+    background: #788795;
+    border-radius: 2px;
+    text-align: center;
+}
+
+.tag {
+	display: inline-block;
+    position: relative;
+}
+
+.gog-btn {
+	min-width: 4.75em;
+	height: 23px;
+    font-size: 12px;
+	background: rgba(0,0,0,.01);
+    box-shadow: 0 1px 3px -1px rgba(0,0,0,.25);
+	padding: 0 .5em;
+    border: 1px solid #a6a6a6;
+    border-radius: 3px;
+	box-sizing: border-box;
+    font-weight: 600;
+    /*text-transform: none;*/
+    text-align: center;
+    color: #686868;
+	cursor: pointer;
+}
+
+.gog-btn:hover, .gog-btn.gog-active {
+	background-repeat: no-repeat !important;
+    border-color: #a2a2a2 #999 #8b8b8b;
+	background: linear-gradient(to bottom,#9fbf00,#80ab00) !important;
+    color: #fff;
+}
+
+.gog-btn.gog-active:not([disabled]):not(:active):hover {
+    background: linear-gradient(to bottom,#acce00,#8bba00) !important;
+}
+
+.o-notes {
+	position: absolute;
+	right: 10px;
+	bottom: 5px;
+	font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-weight: 700;
+}
+
+.o-notes .sc_icon {
+	vertical-align: middle;
+}
+
+.o-note-glob {
+	background: #fafafa;
+    border-bottom: 1px solid #ccc;
+    height: 34px;
+    margin: 0 4px 0 0;
+    position: relative;
+	font-size: 14px;
+    line-height: 17px;
+    padding: 8px;
+    width: 38px;
+	display: inline-block;
+    text-align: center;
+	border-radius: 3px;
+    vertical-align: top;
+}
+
+.o-note-glob, .o-note-glob * {
+	color: #333 !important;
+}
+
+.o-manote {
+    position: relative;
+	display: inline-block;
+	background: #74d336;
+    border-bottom: 1px solid #61b828;
+	font-size: 14px;
+    height: 34px;
+	width: 34px;
+	text-align: center;
+	border-radius: 3px;
+    vertical-align: top;
+	padding: 4px;
+}
+
+.o-manote, .o-manote * {
+	color: #fff !important;
+}
+
+.o-note-sec .sc_icon {
+	position: absolute;
+	width: 10px;
+	height: 10px;
+	background-size: 10px;
+}
+
+.o-note-sec .sc_icon_coeur {
+	top: 3px;
+	right: 3px;
+}
+
+.o-note-sec .sc_icon_critique {
+	top: 3px;
+	left: 3px;
+}
+
+.o-note-sec .sc_icon_envie {
+	bottom: 3px;
+	left: 3px;
+}
+
+.o-note-sec .sc_icon_encours {
+	bottom: 3px;
+	right: 3px;
+}
+
+.o-film .o-type {
+	background-color: #E74C3C;
+}
+
+.o-film .o-border {
+	border-right-color: #E74C3C;
+}
+
+.o-serie .o-type {
+	background-color: #9B59B6;
+}
+
+.o-serie .o-border {
+	border-right-color: #9B59B6;
+}
+
+.o-anime .o-type2 {
+	background-color: #3498DB;
+}
+
+.o-anime .o-border {
+	border-left-color: #3498DB;
+}

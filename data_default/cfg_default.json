@@ -1,0 +1,25 @@
+{
+	"first_use": true,
+	"load_auto": false,
+	"biblio_path": "",
+	"biblio_cfg_path": "data\/biblio.json",
+	"vlc_path": "",
+	"cookie_path": "cookie\/cookie.coo",
+	"explorer_path": "",
+	"vlc_params": {
+		"fullscreen": false,
+		"play_auto": false,
+		"volume": 100,
+		"crop": [
+			0,
+			0,
+			0,
+			0
+		]
+	},
+	"filtre_pos": 2,
+	"tri": "id",
+	"affichage": "list2",
+	"sc_check_interval": 0,
+	"curseur_load": false
+}

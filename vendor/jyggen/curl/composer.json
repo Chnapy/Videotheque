@@ -1,0 +1,40 @@
+{
+	"name": "jyggen/curl",
+	"type": "library",
+	"description": "A simple and lightweight cURL library with support for multiple requests in parallel.",
+	"keywords": [
+		"cURL",
+		"HTTP",
+		"Multi-thread",
+		"parallel",
+		"spider",
+		"bot",
+		"laravel"
+	],
+	"homepage": "http://docs.jyggen.com/curl",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Jonas Stendahl",
+			"email": "jonas.stendahl@gmail.com"
+		}
+	],
+	"autoload": {
+		"psr-0": {
+			"jyggen\\Curl": "lib/"
+		}
+	},
+	"require": {
+		"php": ">=5.3.0",
+		"ext-curl": "*",
+		"symfony/http-foundation": "~2.0"
+	},
+	"require-dev": {
+		"mockery/mockery": "dev-master"
+	},
+	"extra": {
+		"branch-alias": {
+			"dev-master": "3.1-dev"
+		}
+	}
+}
