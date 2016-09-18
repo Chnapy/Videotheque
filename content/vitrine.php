@@ -3,14 +3,14 @@
 		setParams(<?php
 echo json_encode(CFG::$cfg);
 ?>);
-		setConnected(<?php
-if (SC::$client->isConnecte()) {
-	$items = SC::$client->getUserItems();
-	echo 'true, "' . $items['pseudo'] . '", "' . $items['avatar'] . '", "' . $items['lien'] . '"';
-} else {
-	echo 'false';
-}
-?>);
+//		setConnected(<?php
+//if (SC::$client->isConnecte()) {
+//	$items = SC::$client->getUserItems();
+//	echo 'true, "' . $items['pseudo'] . '", "' . $items['avatar'] . '", "' . $items['lien'] . '"';
+//} else {
+//	echo 'false';
+//}
+?>//);
 		onLoad();
 	};
 </script>
@@ -40,7 +40,7 @@ if (SC::$client->isConnecte()) {
 				<div class='deco-btn'>
 					<span class="gog-btn" onclick="deconnexion();"><span class="fui-exit"></span></span>
 				</div>
-				<a class='sc-log-content' target='_blank'>
+				<a class='sc-log-content loadable' target='_blank'>
 				</a>
 				<form action="#" method="POST" class="sc-log-form gog-form smooth" id='sc-log-form'>
 					<div class="sc-log-form-tip"></div>

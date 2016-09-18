@@ -7,6 +7,7 @@ use jyggen\Curl\Exception\CurlErrorException;
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+//register_shutdown_function('shutDownFunction');
 session_start();
 
 require_once 'main/include.php';
@@ -24,21 +25,24 @@ if (!isset($_POST['m']) || empty($_POST['m'])) {
 try {
 	switch ($m) {
 		case "init":
-			require_once 'init/init.php';
+			require_once 'main/init.php';
+			exit();
+		case "scanner":
+			require_once 'main/Scanner.php';
 			exit();
 		case "vitrine":
 			beginHTML();
-			require_once 'vitrine/vitrine.php';
+			require_once 'content/vitrine.php';
 			endHTML();
 			exit();
 		case "items":
-			require_once 'vitrine/items.php';
+			require_once 'main/items.php';
 			exit();
 		case "sc":
 			SC::requete();
 			exit();
 		case "vlc":
-			require_once 'main/vlc.php';
+			require_once 'main/VLC.php';
 			exit();
 		default:
 			exit();
@@ -51,6 +55,14 @@ try {
 	echo json_encode(false);
 }
 
+function shutDownFunction() { 
+    $error = error_get_last();
+    // fatal error, E_ERROR === 1
+    if ($error['type'] === E_ERROR) {
+		var_dump($error);
+    } 
+}
+
 function beginHTML() {
 	?>
 	<!DOCTYPE html>
@@ -59,7 +71,7 @@ function beginHTML() {
 			<title>Ma vidéothèque</title>
 			<meta charset="UTF-8">
 			<meta name="viewport" content="width=device-width, initial-scale=1.0">
-			
+
 			<link rel="icon" type="image/x-icon" href="img/favicon.ico">
 
 			<link rel="stylesheet" href="css/bootstrap.min.css" />
@@ -84,8 +96,8 @@ function beginHTML() {
 
 			<script src="js/ajax.js"></script>
 			<script src="js/alert.js"></script>
-			<script src="init/init.js"></script>
-			<script src="vitrine/vitrine.js"></script>
+			<script src="js/init.js"></script>
+			<script src="js/vitrine.js"></script>
 			<script src="js/first.js"></script>
 			<script src="js/sc.js"></script>
 			<script src="js/recherche.js"></script>

@@ -60,7 +60,7 @@ class Oeuvre {
 
 	function checkConnection() {
 		$this->checkDetails();
-		SC::$client->setConnecte(boolval($this->details->find('html body .lahe-header .lahe-topBar-userMenu .profileAction')));
+		SC::getClient()->setConnecte(boolval($this->details->find('html body .lahe-header .lahe-topBar-userMenu .profileAction')));
 	}
 
 	static function getTrueUrl($url) {
@@ -237,7 +237,7 @@ class Oeuvre {
 
 	public function checkFront() {
 		if (!isset($this->front)) {
-			$this->front = SC::$client->getOeuvreFront(dirname($this->uri));
+			$this->front = SC::getClient()->getOeuvreFront(dirname($this->uri));
 		}
 	}
 

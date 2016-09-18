@@ -206,7 +206,7 @@ function scan() {
 	if ($('#scanner-modal').hasClass('show-error')) {
 		showHideScan();
 	}
-	myPost("index.php", {m: "init", f: "scan"}, function (data) {
+	myPost("index.php", {m: "scanner", f: "scan"}, function (data) {
 		$('#scan_btn').prop('disabled', false);
 		$('#scan_btn').removeClass('load');
 		$('#scanfini').show();
@@ -295,7 +295,7 @@ function send(form) {
 	var packet = $(form).serialize();
 
 	$('#form_scan input[type=submit]').prop("disabled", true);
-	myPost("index.php", {m: "init", f: "ajout", p: packet}, function (data) {
+	myPost("index.php", {m: "scanner", f: "ajout", p: packet}, function (data) {
 
 		if (data.success) {
 			$('#form_scan input[name=path]').val("");

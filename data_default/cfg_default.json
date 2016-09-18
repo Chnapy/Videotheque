@@ -2,6 +2,10 @@
 	"first_use": true,
 	"load_auto": false,
 	"curl_timeout": 30000,
+	"sc_cache": {
+		"active": true,
+		"sauf_notes": true
+	},
 	"biblio_path": "",
 	"biblio_cfg_path": "data\/biblio.json",
 	"vlc_path": "",

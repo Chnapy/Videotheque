@@ -3,12 +3,6 @@
 use thcolin\SensCritiqueAPI\Client;
 
 switch ($_POST['f']) {
-	case "scan":
-		scan();
-		break;
-	case "ajout":
-		ajout();
-		break;
 	case "open_dir":
 		open();
 		break;
@@ -32,126 +26,6 @@ function affichage() {
 function tri() {
 	$val = $_POST['v'];
 	echo CFG::write('tri', $val);
-}
-
-function scan() {
-	$src = CFG::$b_path;
-
-	$ret = array(
-		"success" => true,
-		"item" => array(),
-		"failed" => array()
-	);
-
-	global $list;
-	$list = $ret['item'];
-
-	global $failed;
-	$failed = $ret['failed'];
-
-	global $ignored;
-	$ignored = BIBLIO::getAllPath();
-
-	$ret['success'] = parcourDirectory($src);
-//	if(!$ret['success']) {
-//		$failed[] = 'Scan de la bibliothèque impossible. Le chemin est-il correct ? A vérifier dans les paramètres.';
-//	}
-	$ret['item'] = $list;
-	$ret['failed'] = $failed;
-
-	echo json_encode($ret);
-}
-
-function parcourDirectory($dir) {
-	if (!is_dir($dir)) {
-		return false;
-	}
-	$dossierOuvert = opendir($dir);
-	if ($dossierOuvert === FALSE) {
-		return false;
-	}
-	$path = null;
-	while ($file = readdir($dossierOuvert)) {
-
-		if ($file != ".." && $file != ".") {
-			$path = CFG::parsePath("$dir/$file");
-			if (isIgnored($path)) {
-				continue;
-			}
-
-			if (is_dir($path)) {
-				if (!parcourDirectory($path)) {
-					return false;
-				}
-			} else {
-				checkFile($path);
-			}
-		}
-	}
-	return true;
-}
-
-function isIgnored($path) {
-	global $ignored;
-
-	foreach ($ignored as $i) {
-		if ($path == $i) {
-			return true;
-		}
-	}
-	return false;
-}
-
-function checkFile($file) {
-	global $list;
-	global $failed;
-
-	if (!realpath($file)) {
-		$failed[] = $file;
-		return false;
-	}
-
-	$mime = mime_content_type($file);
-	if (!strstr($mime, "video/")) {
-		return false;
-	}
-
-	array_push($list, $file);
-}
-
-function ajout() {
-	$packet = $_POST['p']; //path, langues, sub, sc, saison
-	parse_str($packet);
-
-	$path = CFG::parsePath($path);
-	$langues = @split(",", str_replace(" ", "", $langues));
-	$sub = @split(",", str_replace(" ", "", $sub));
-	$sc = trim($sc);
-	$type = explode('/', $sc)[3];
-
-	switch ($type) {
-		case "film":
-			$ret = BIBLIO::addFilm($path, $langues, $sub, $sc);
-			break;
-		case "serie":
-//			if (!is_numeric($saison)) {
-//				$success = false;
-//			} else {
-			$ret = BIBLIO::addSerie($path, $langues, $sub, $sc, $saison);
-//			}
-			break;
-		default:
-			$ret = false;
-			break;
-	}
-
-	if (!$ret) {
-		echo json_encode(array(
-			"success" => false
-		));
-	} else {
-		echo json_encode($ret);
-	}
 }
 
 function open() {
@@ -182,6 +56,8 @@ function params() {
 			CFG::$cfg['sc_check_interval'] = intval($form['sc_interval']);
 			CFG::$cfg['curl_timeout'] = intval($form['curl_timeout']);
 			Client::setTimeout(CFG::$cfg['curl_timeout']);
+			CFG::$cfg['sc_cache']['active'] = (isset($form['sc_cache_active']) && $form['sc_cache_active'] === 'on');
+			CFG::$cfg['sc_cache']['sauf_notes'] = (isset($form['sc_cache_sauf_notes']) && $form['sc_cache_sauf_notes'] === 'on');
 			CFG::$cfg['curseur_load'] = (isset($form['curseur_load']) && $form['curseur_load'] === 'on');
 			if (isset($form['filtre_pos'])) {
 				CFG::$cfg['filtre_pos'] = intval($form['filtre_pos']);

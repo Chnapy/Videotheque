@@ -16,7 +16,7 @@ function getOfflineData($item) {
 		'path',
 		'videos',
 		'file_isset',
-		'is_connecte'
+//		'is_connecte'	//it's not offline !
 	));
 }
 
@@ -47,15 +47,12 @@ function getFrontData($item) {
 	));
 }
 
-if(!BIBLIO::$loaded) {
+if (!BIBLIO::$loaded) {
 	echo json_encode(false);
 	exit();
 }
 
 switch ($_POST['f']) {
-//	case "all":
-//		all();
-//		break;
 	case "load":
 		load();
 		break;
@@ -90,9 +87,20 @@ function details() {
 
 function load() {
 	$id = intval($_POST['id']);
-	$item = Oeuvre::constructOeuvre(BIBLIO::getById($id));
-	
-	$arr = getOfflineData($item) + getDetailsData($item) + getFrontData($item);
+	$json = BIBLIO::getById($id);
+	$item = Oeuvre::constructOeuvre($json);
+
+	if (CFG::$cfg['sc_cache']['active']) {
+		if (!isset($json['sc_cache']['titre'])) {
+			$json['sc_cache'] = getDetailsData($item) + getFrontData($item);
+			$json['sc_cache']['last_load'] = time();
+			BIBLIO::writeById($id, $json);
+		}
+		$arr = $json['sc_cache'] + getOfflineData($item);
+	} else {
+		$arr = getOfflineData($item) + getDetailsData($item) + getFrontData($item);
+	}
+//	var_dump($arr);
 	echo json_encode($arr);
 }
 
@@ -179,7 +187,7 @@ function getParamValue($item, $param) {
 		case "trailer":
 			return $item->getTrailer();
 		case "is_connecte":
-			return SC::$client->isConnecte();
+			return SC::getClient()->isConnecte();
 		case "file_isset":
 			return $item->isPathOk();
 		case "path":

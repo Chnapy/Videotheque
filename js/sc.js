@@ -23,8 +23,26 @@ function sc_init() {
 			smooth_show(cible);
 		}
 	});
-	
+
+	checkConnexion();
 	checkSCLoop();
+}
+
+function checkConnexion() {
+	$('.sc-log-content').removeAttr('href');
+	$(".sc-log").addClass('not-log');
+	$('.deco-btn').hide();
+	$('.sc-log-content').addClass('load');
+	myPost("index.php", {m: "sc", f: "connexion_info"}, function (data) {
+		$('.sc-log-content').removeClass('load');
+		if (!data) {
+			setConnected(false);
+			return;
+		}
+		setConnected(data['is-connecte'], data['pseudo'], data['avatar'], data['lien']);
+	}, "json"/*, function(jqXHR, textStatus, error) {
+		isTimeoutError(jqXHR.responseText);
+	}*/);
 }
 
 function setSCAccessible(sc_accessible) {
@@ -39,7 +57,7 @@ function setSCAccessible(sc_accessible) {
 }
 
 function checkSCLoop() {
-	if(cfg['sc_check_interval'] <= 0)
+	if (cfg['sc_check_interval'] <= 0)
 		return;
 	myPost("index.php", {m: "sc", f: "accessible"}, function (data) {
 		setSCAccessible(data);

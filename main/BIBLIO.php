@@ -161,5 +161,16 @@ class BIBLIO {
 		}
 		return false;
 	}
+	
+	static function writeById($id, $json) {
+		for($i = 0; $i < count(self::$biblio); $i++) {
+			if (intval(self::$biblio[$i]['id']) === $id) {
+				self::$biblio[$i] = $json;
+				self::submit();
+				return true;
+			}
+		}
+		return false;
+	}
 
 }

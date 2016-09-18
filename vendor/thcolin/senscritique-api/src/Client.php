@@ -24,7 +24,7 @@ class Client {
 	private $sc_accessible;
 	private $doc;
 
-	public function init() {
+	public static function init() {
 		$cookie_path = CFG::$cfg['cookie_path'];
 
 		if (!file_exists(realpath($cookie_path))) {

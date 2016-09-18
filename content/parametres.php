@@ -17,6 +17,20 @@
 								</i>
 							</td>
 						</tr>
+						<tr><td class="gog-td-label"><label for="ip_sc_cache">Utiliser un système de cache lors du chargement des oeuvres</label></td>
+							<td>
+								<i class="gog-checkbox <?php echo CFG::$cfg['sc_cache']['active'] ? 'is-selected' : ''; ?>">
+									<input type="checkbox" name="sc_cache_active" id="ip_sc_cache" <?php echo CFG::$cfg['sc_cache']['active'] ? 'checked' : ''; ?>>
+								</i>
+							</td>
+						</tr>
+						<tr><td class="gog-td-label">&emsp;<label for="ip_sc_cache_notes">Mais recharger les notes</label></td>
+							<td>
+								<i class="gog-checkbox <?php echo CFG::$cfg['sc_cache']['sauf_notes'] ? 'is-selected' : ''; ?>">
+									<input type="checkbox" name="sc_cache_sauf_notes" id="ip_sc_cache_notes" <?php echo CFG::$cfg['sc_cache']['sauf_notes'] ? 'checked' : ''; ?>>
+								</i>
+							</td>
+						</tr>
 						<tr><td class="gog-td-label">Timeout des requêtes Senscritique, en ms (ou 0 pour aucune limite de temps)</td>
 							<td><input type="number" name="curl_timeout" class="gog-input" required value=<?php echo CFG::$cfg['curl_timeout']; ?>></td>
 						</tr>

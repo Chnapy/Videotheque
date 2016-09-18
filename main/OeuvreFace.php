@@ -24,11 +24,11 @@ class OeuvreFace {
 	}
 
 	function checkConnection() {
-		SC::$client->setConnecte(boolval($this->find('html body .lahe-header .lahe-topBar-userMenu .profileAction')));
+		SC::getClient()->setConnecte(boolval($this->find('html body .lahe-header .lahe-topBar-userMenu .profileAction')));
 	}
 
 	public function getMaNote() {
-		$is_connecte = SC::$client->isConnecte();
+		$is_connecte = SC::getClient()->isConnecte();
 		if (!$is_connecte) {
 			return array('is_connecte' => $is_connecte);
 		}

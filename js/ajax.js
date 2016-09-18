@@ -1,5 +1,7 @@
 
 var error_message = "Une erreur s'est produite. En êtes-vous le fautif ? Probablement :)";
+var timeout_error = "<br />\n\
+<b>Fatal error</b>:  Maximum execution time of 30 seconds exceeded";
 
 function ajax_init() {
 	$(document).ajaxStart(function () {
@@ -33,59 +35,34 @@ function myPost(url, items, func, type, fail) {
 			var sc_accessible = data !== false;
 //			setSCAccessible(sc_accessible);
 			func(data, sc_accessible);
-		}).fail(function () {
-			errorAlert(error_message);
-			return;
+		}).fail(function (jqXHR, textStatus, error) {
+			default_error_function(jqXHR, textStatus, error);
 		});
 	} else if (arguments.length === 4) {
-		myPost(url, items, func, type, function () {
-			errorAlert(error_message);
-			return;
+		myPost(url, items, func, type, function (jqXHR, textStatus, error) {
+			default_error_function(jqXHR, textStatus, error);
 		});
 	} else {
 		$.post(url, items, function (data) {
 			var sc_accessible = data !== false;
 //			setSCAccessible(sc_accessible);
 			func(data, sc_accessible);
-		}, type).fail(function () {
-			fail();
+		}, type).fail(function (jqXHR, textStatus, error) {
+			fail(jqXHR, textStatus, error);
 		});
 	}
 }
 
-function htmlentities(string, quote_style, charset, double_encode) {
+function default_error_function(jqXHR, textStatus, error) {
+	errorAlert(textStatus + '<br/>' + error + '<br/><br/>' + jqXHR.responseText);
+	console.debug([textStatus, error, jqXHR]);
+}
 
-	var hash_map = this.get_html_translation_table('HTML_ENTITIES', quote_style),
-			symbol = '';
-	string = string == null ? '' : string + '';
-
-	if (!hash_map) {
-		return false;
-	}
-
-	if (quote_style && quote_style === 'ENT_QUOTES') {
-		hash_map["'"] = '&#039;';
-	}
-
-	if (!!double_encode || double_encode == null) {
-		for (symbol in hash_map) {
-			if (hash_map.hasOwnProperty(symbol)) {
-				string = string.split(symbol)
-						.join(hash_map[symbol]);
+function isTimeoutError(data) {
+			if (data.substring(0, timeout_error.length) === timeout_error) {
+				alert(data);
+			} else {
+				console.debug(data.substring(0, timeout_error.length));
+				console.debug(timeout_error);
 			}
-		}
-	} else {
-		string = string.replace(/([\s\S]*?)(&(?:#\d+|#x[\da-f]+|[a-zA-Z][\da-z]*);|$)/g, function (ignore, text, entity) {
-			for (symbol in hash_map) {
-				if (hash_map.hasOwnProperty(symbol)) {
-					text = text.split(symbol)
-							.join(hash_map[symbol]);
-				}
-			}
-
-			return text + entity;
-		});
-	}
-
-	return string;
 }
