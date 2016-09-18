@@ -7,7 +7,7 @@ En attendant de faire un readme digne de ce nom, l'application possède un tutor
 
 Côté serveur, l'application n'utilise que du PHP, aucun besoin d'une base de donnée.
 
-### Configuration
+## Configuration
 L'application utilise **cURL** et la fonction **get_mime_type**. Vous devez donc configurer votre serveur en conséquence.
 
 ### Sous Linux (testé sur Ubuntu 16.04)
