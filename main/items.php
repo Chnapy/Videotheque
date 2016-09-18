@@ -56,27 +56,40 @@ switch ($_POST['f']) {
 	case "load":
 		load();
 		break;
-	case "details":
-		details();
-		break;
 	case "offline":
 		$id = intval($_POST['id']);
 		$item = Oeuvre::constructOeuvre(BIBLIO::getById($id));
 		echo json_encode(getOfflineData($item));
 		break;
 	case "details":
-		$id = intval($_POST['id']);
-		$item = Oeuvre::constructOeuvre(BIBLIO::getById($id));
-		echo json_encode(getDetailsData($item));
-		break;
 	case "front":
-		$id = intval($_POST['id']);
-		$item = Oeuvre::constructOeuvre(BIBLIO::getById($id));
-		echo json_encode(getFrontData($item));
+		getDataFromString($_POST['f'], intval($_POST['id']));
 		break;
 	case "init":
 		echo json_encode(BIBLIO::getAllID());
 		break;
+}
+
+function getDataFromString($f, $id) {
+	$json = BIBLIO::getById($id);
+	$item = Oeuvre::constructOeuvre($json);
+	switch ($f) {
+		case "front":
+			$data = getFrontData($item);
+			break;
+		case "details":
+			$data = getDetailsData($item);
+			break;
+		case "offline":
+			$data = getOfflineData($item);
+			break;
+	}
+	if (CFG::$cfg['sc_cache']['active']) {
+		array_merge($json['sc_cache'], $data);
+		$json['sc_cache']['last_load'] = time();
+		BIBLIO::writeById($id, $json);
+	}
+	echo json_encode($data);
 }
 
 function details() {

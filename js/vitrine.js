@@ -481,29 +481,29 @@ function loadDetails(o) {
 	}
 }
 
-function loadAndApply(item, param, func) {
-	if (item[param] == null) {
-		myPost("index.php", {m: "items", f: "details", id: item['id'], params: [param]}, function (data) {
-			item[param] = (data[param] == null ? '' : data[param]);
-			if (item['id'] === fiche_id) {
-				loadAndApply(item, param, func);
-			}
-		}, "json");
-	} else {
-		func(item[param]);
-	}
-}
+//function loadAndApply(item, param, func) {
+//	if (item[param] == null) {
+//		myPost("index.php", {m: "items", f: "details", id: item['id'], params: [param]}, function (data) {
+//			item[param] = (data[param] == null ? '' : data[param]);
+//			if (item['id'] === fiche_id) {
+//				loadAndApply(item, param, func);
+//			}
+//		}, "json");
+//	} else {
+//		func(item[param]);
+//	}
+//}
 
-function loadAndApplyNotFiche(item, param, func) {
-	if (item[param] == null) {
-		myPost("index.php", {m: "items", f: "details", id: item['id'], params: [param]}, function (data) {
-			item[param] = (data[param] == null ? '' : data[param]);
-			loadAndApplyNotFiche(item, param, func);
-		}, "json");
-	} else {
-		func(item[param]);
-	}
-}
+//function loadAndApplyNotFiche(item, param, func) {
+//	if (item[param] == null) {
+//		myPost("index.php", {m: "items", f: "details", id: item['id'], params: [param]}, function (data) {
+//			item[param] = (data[param] == null ? '' : data[param]);
+//			loadAndApplyNotFiche(item, param, func);
+//		}, "json");
+//	} else {
+//		func(item[param]);
+//	}
+//}
 
 function setFicheSaga(saga) {
 	$('#fiche .saga-head .saga-head-txt').html(saga["titre"]['text']);

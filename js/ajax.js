@@ -54,15 +54,15 @@ function myPost(url, items, func, type, fail) {
 }
 
 function default_error_function(jqXHR, textStatus, error) {
-	errorAlert(textStatus + '<br/>' + error + '<br/><br/>' + jqXHR.responseText);
-	console.debug([textStatus, error, jqXHR]);
+	if (isTimeoutError(jqXHR.responseText)) {
+		errorAlert("Timeout de la requête atteint. Le serveur de Senscritique est-il encore joignable ? Vous pouvez changer la valeur du timeout dans les paramètres.");
+	} else {
+		errorAlert(textStatus + '<br/>' + error + '<br/><br/>' + jqXHR.responseText);
+		console.debug([textStatus, error, jqXHR]);
+	}
 }
 
 function isTimeoutError(data) {
-			if (data.substring(0, timeout_error.length) === timeout_error) {
-				alert(data);
-			} else {
-				console.debug(data.substring(0, timeout_error.length));
-				console.debug(timeout_error);
-			}
+//	console.debug(data.indexOf(timeout_error));
+	return data.indexOf(timeout_error) >= 0;
 }

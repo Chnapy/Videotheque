@@ -158,10 +158,10 @@
 							<td><input type="text" name="biblio_cfg_path" class="gog-input" required value="<?php echo CFG::$cfg['biblio_cfg_path']; ?>"></td>
 						</tr>
 						<tr><td class="gog-td-label">Exécutable de VLC</td>
-							<td><input type="text" name="vlc_path" class="gog-input" required value="<?php echo CFG::$cfg['vlc_path']; ?>"></td>
+							<td><input type="text" name="vlc_path" class="gog-input" value="<?php echo CFG::$cfg['vlc_path']; ?>"></td>
 						</tr>
 						<tr><td class="gog-td-label">Exécutable du gestionnaire de fichier</td>
-							<td><input type="text" name="explorer_path" class="gog-input" required value="<?php echo CFG::$cfg['explorer_path']; ?>"></td>
+							<td><input type="text" name="explorer_path" class="gog-input" value="<?php echo CFG::$cfg['explorer_path']; ?>"></td>
 						</tr>
 						<tr><td class="gog-td-label">Fichier de stockage du cookie Senscritique</td>
 							<td><input type="text" name="cookie_path" class="gog-input" required value="<?php echo CFG::$cfg['cookie_path']; ?>"></td>

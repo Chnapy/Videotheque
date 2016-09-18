@@ -81,7 +81,7 @@ button, label, .gog-checkbox, .gog-radio {
 	height: 85px;
 	max-height: 500px;
 	overflow: hidden;
-	word-break: break-all;
+	word-break: break-word;
 }
 
 .alert:hover {

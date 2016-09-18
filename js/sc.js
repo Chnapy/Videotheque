@@ -147,7 +147,7 @@ function setConnected(is_connecte, pseudo, avatar, lien) {
 }
 
 function deconnexion() {
-	var exit_icn = $('.sc-log .deco-btn .gog-btn').html();
+//	var exit_icn = $('.sc-log .deco-btn .gog-btn').html();
 //	$('.sc-log .deco-btn .gog-btn').addClass('load');
 	myPost("index.php", {m: "sc", f: "deconnexion"}, function (data) {
 		if (data['success']) {
