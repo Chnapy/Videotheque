@@ -656,3 +656,45 @@
 	display: inline-block;
 	width: 49%;
 }
+
+.fiche-toleft, .fiche-toright {
+	position: fixed;
+	margin-top: 28px;
+	top: 50%;
+	transform: translateY(-50%);
+    width: 56px;
+	display: inline-block;
+    width: auto;
+	opacity: .5;
+}
+
+.fiche-toleft {
+    left: 0;
+}
+
+.fiche-toright {
+    right: 0;
+}
+
+.fiche-toleft:hover, .fiche-toright:hover {
+	width: auto;
+	opacity: 1;
+}
+
+.fiche-toleft:hover .fiche-toleft-titre, .fiche-toright:hover .fiche-toright-titre {
+	display: inline;
+}
+
+.fiche-toleft-titre, .fiche-toright-titre {
+	display: none;
+}
+
+.fiche-toleft-titre {
+	display: none;
+	margin-left: 10px;
+}
+
+.fiche-toright-titre {
+	display: none;
+	margin-right: 10px;
+}

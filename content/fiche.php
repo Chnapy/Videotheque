@@ -66,26 +66,6 @@
 				<div class="visionnage-box loadable">
 					<div class="mini-titre">Visionner</div>
 					<div class="visionnage">
-						<!--					<div class="saison module">
-												<div class="saison-titre">Saison 1</div>
-												<div class="o-langues">
-													<span class="glyphicon glyphicon-volume-up"></span>
-													<span class="label label-default">jap</span>
-													<span class="label label-default">fr</span>
-												</div>
-												<div class="o-sub">
-													<span class="glyphicon glyphicon-subtitles"></span>
-													<span class="label label-default">fr</span>
-												</div>
-												<div class="list-video">
-													<div class="video gog-btn gog-active">
-														<span class="fui-play"></span>
-														<div class="video-path">
-															Evangelion.mkv
-														</div>
-													</div>
-												</div>
-											</div>-->
 					</div>
 				</div>
 			</div>
@@ -112,5 +92,7 @@
 				</div>
 			</div>
 		</div>
+		<button class="fiche-toleft smooth gog-btn-big"><span class="fui-arrow-left"></span><span class="fiche-toleft-titre"></span></button>
+		<button class="fiche-toright smooth gog-btn-big"><span class="fiche-toright-titre"></span><span class="fui-arrow-right"></span></button>
 	</div>
 </div>

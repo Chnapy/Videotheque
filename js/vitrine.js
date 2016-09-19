@@ -383,6 +383,27 @@ function toFiche(id) {
 	smooth_hide($('#content'));
 	smooth_show($('#fiche'));
 
+	var prev = $('#oeuvre-' + id).prev();
+	var next = $('#oeuvre-' + id).next();
+
+	if (prev.length === 0) {
+		$('.fiche-toleft').hide();
+	} else {
+		$('.fiche-toleft').show();
+		var prev_id = $(prev).attr('id').split('-')[1];
+		$('.fiche-toleft').attr('onclick', 'toFiche(' + prev_id + ');')
+		$('.fiche-toleft-titre').text($(prev).find('.o-nom').html());
+	}
+
+	if (next.length === 0) {
+		$('.fiche-toright').hide();
+	} else {
+		$('.fiche-toright').show();
+		var next_id = $(next).attr('id').split('-')[1];
+		$('.fiche-toright').attr('onclick', 'toFiche(' + next_id + ');')
+		$('.fiche-toright-titre').text($(next).find('.o-nom').html());
+	}
+
 	if (id === fiche_id) {
 		return;
 	}
