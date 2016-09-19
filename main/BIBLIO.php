@@ -149,7 +149,7 @@ class BIBLIO {
 			return false;
 		}
 		fclose($fp);
-
+		
 		return true;
 	}
 
@@ -166,8 +166,7 @@ class BIBLIO {
 		for($i = 0; $i < count(self::$biblio); $i++) {
 			if (intval(self::$biblio[$i]['id']) === $id) {
 				self::$biblio[$i] = $json;
-				self::submit();
-				return true;
+				return self::submit();
 			}
 		}
 		return false;

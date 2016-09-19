@@ -83,9 +83,11 @@ function getDataFromString($f, $id) {
 		case "offline":
 			$data = getOfflineData($item);
 			break;
+		default:
+			return;
 	}
 	if (CFG::$cfg['sc_cache']['active']) {
-		array_merge($json['sc_cache'], $data);
+		$json['sc_cache'] = array_merge($json['sc_cache'], $data);
 		$json['sc_cache']['last_load'] = time();
 		BIBLIO::writeById($id, $json);
 	}

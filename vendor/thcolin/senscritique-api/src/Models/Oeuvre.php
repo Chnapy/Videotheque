@@ -91,7 +91,8 @@ class Oeuvre {
 
 	public function getDuration() {
 		$this->checkDetails();
-		$d = explode(' ', $this->details->getDuration());
+		$duree = $this->details->getDuration();
+		$d = explode(' ', $duree);
 		$a = array();
 		foreach ($d as $v) {
 			$v = intval($v);
@@ -101,8 +102,10 @@ class Oeuvre {
 		}
 		if (count($a) === 1) {
 			return array('h' => 0, 'm' => $a[0]);
-		} else {
+		} else if (count($a) === 2) {
 			return array('h' => $a[0], 'm' => $a[1]);
+		} else {
+			return array('h' => '-', 'm' => '-');
 		}
 	}
 

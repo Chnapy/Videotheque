@@ -292,22 +292,18 @@ function load(i, tab) {
 	if (tab[i] == null) {
 		$('.nbr_oeuvres').html('');
 		$('.load-oeuvre').removeClass('load');
+		if (cfg['sc_cache']['sauf_notes']) {
+			loadNotesForAll(profile.connected);
+		}
 		return;
 	}
 	loadOeuvre(tab[i], function () {
 		$('.nbr_oeuvres').html((i + 1) + '/');
 		load(i + 1, tab);
 	});
-//	myPost("index.php", {m: "items", f: "load", id: tab[i]}, function (data) {
-//		loadItem(data);
-//		$('.nbr_oeuvres').html((i + 1) + '/');
-//		load(i + 1, tab);
-//	}, "json");
 }
 
 function loadOeuvre(id, func) {
-//	if(collection[id] != null)
-//		return false;
 	myPost("index.php", {m: "items", f: "load", id: id}, function (data) {
 		loadItem(data);
 		if (func) {
@@ -343,7 +339,7 @@ function addOeuvre(o) {
 			' + o.hassagaToTxt() + '\n\
 			<span class="glyphicon glyphicon-floppy-remove o-no-file ' + txt_file_isset + '"></span>\n\
 			<div class="o-notes">\n\
-				<div class="o-note-glob">' + o.moyenneToTxt() + '</div>\n\
+				<div class="o-note-glob loadable">' + o.moyenneToTxt() + '</div>\n\
 				<div class="o-manote loadable l-white">' + o.maNoteToTxt() + '</div>\n\
 			</div>\n\
 			<div class="o-clickable clickable" onclick="toFiche(' + o.id + ')">\n\

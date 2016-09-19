@@ -41,8 +41,8 @@ function checkConnexion() {
 		}
 		setConnected(data['is-connecte'], data['pseudo'], data['avatar'], data['lien']);
 	}, "json"/*, function(jqXHR, textStatus, error) {
-		isTimeoutError(jqXHR.responseText);
-	}*/);
+	 isTimeoutError(jqXHR.responseText);
+	 }*/);
 }
 
 function setSCAccessible(sc_accessible) {
@@ -102,26 +102,26 @@ function setConnected(is_connecte, pseudo, avatar, lien) {
 		$(".sc-log").removeClass('not-log');
 		$('.deco-btn').show();
 
-		for (var i = 0; i < collection.length; i++) {
-			(function (o) {
-				if (o == null) {
-					return;
-				}
-				if (o.manote != null) {
-					o.manote = null;
-				}
-				$('#oeuvre-' + o.id + ' .o-manote').addClass("load");
-				myPost("index.php", {m: "items", f: "front", id: o.id}, function (data) {
-					o.loadJSON(data);
-					var txt = o.maNoteToTxt();
-					$('#oeuvre-' + o['id'] + ' .o-manote').html(txt);
-					$('#oeuvre-' + o['id'] + ' .o-manote').removeClass("load");
-					if (fiche_id === o['id']) {
-						$('#fiche .o-manote').html(txt);
-					}
-				}, "json");
-			})(collection[i]);
-		}
+//		for (var i = 0; i < collection.length; i++) {
+//			(function (o) {
+//				if (o == null) {
+//					return;
+//				}
+//				if (o.manote != null) {
+//					o.manote = null;
+//				}
+//				$('#oeuvre-' + o.id + ' .o-manote').addClass("load");
+//				myPost("index.php", {m: "items", f: "front", id: o.id}, function (data) {
+//					o.loadJSON(data);
+//					var txt = o.maNoteToTxt();
+//					$('#oeuvre-' + o['id'] + ' .o-manote').html(txt);
+//					$('#oeuvre-' + o['id'] + ' .o-manote').removeClass("load");
+//					if (fiche_id === o['id']) {
+//						$('#fiche .o-manote').html(txt);
+//					}
+//				}, "json");
+//			})(collection[i]);
+//		}
 
 	} else {
 		$('.sc-log-content').html("Se connecter");
@@ -130,18 +130,63 @@ function setConnected(is_connecte, pseudo, avatar, lien) {
 		$('.deco-btn').hide();
 		smooth_show(".sc-log-form");
 
-		var o;
-		for (var i = 0; i < collection.length; i++) {
-			o = collection[i];
-			if (o == null) {
-				continue;
-			}
-			o.manote = {'is_connecte': false};
-			var txt = o.maNoteToTxt();
-			$('#oeuvre-' + o.id + ' .o-manote').html(txt);
+//		var o;
+//		for (var i = 0; i < collection.length; i++) {
+//			o = collection[i];
+//			if (o == null) {
+//				continue;
+//			}
+//			o.manote = {'is_connecte': false};
+//			var txt = o.maNoteToTxt();
+//			$('#oeuvre-' + o.id + ' .o-manote').html(txt);
+//			if (fiche_id === o.id) {
+//				$('#fiche .o-manote').html(txt);
+//			}
+//		}
+	}
+	loadNotesForAll(is_connecte);
+}
+
+function loadNotesForAll(is_connecte) {
+	var o;
+	for (var i = 0; i < collection.length; i++) {
+		o = collection[i];
+		loadNotes(o, is_connecte);
+	}
+}
+
+function loadNotes(o, is_connecte) {
+	if (o == null) {
+		return;
+	}
+	if (is_connecte) {
+		if (o.manote != null) {
+			o.manote = null;
+		}
+		$('#oeuvre-' + o.id + ' .o-manote').addClass("load");
+		$('#oeuvre-' + o.id + ' .o-note-glob').addClass("load");
+		myPost("index.php", {m: "items", f: "front", id: o.id}, function (data) {
+			o.loadJSON(data);
+			var txt_manote = o.maNoteToTxt();
+			var txt_notemoy = o.moyenneToTxt();
+			$('#oeuvre-' + o.id + ' .o-manote').html(txt_manote);
+			$('#oeuvre-' + o.id + ' .o-note-glob').html(txt_notemoy);
+			$('#oeuvre-' + o.id + ' .o-manote').removeClass("load");
+			$('#oeuvre-' + o.id + ' .o-note-glob').removeClass("load");
 			if (fiche_id === o.id) {
-				$('#fiche .o-manote').html(txt);
+				$('#fiche .o-manote').html(txt_manote);
+				$('#fiche .o-note-glob').html(txt_notemoy);
 			}
+		}, "json");
+	} else {
+		o.manote = {'is_connecte': false};
+		var txt_manote = o.maNoteToTxt();
+		var txt_notemoy = o.moyenneToTxt();
+		$('#oeuvre-' + o.id + ' .o-manote').html(txt_manote);
+		$('#oeuvre-' + o.id + ' .o-note-glob').html(txt_notemoy);
+		if (fiche_id === o.id) {
+			$('#fiche .o-manote').html(txt_manote);
+			$('#fiche .o-note-glob').html(txt_notemoy);
 		}
 	}
 }

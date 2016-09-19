@@ -149,10 +149,13 @@ class Artwork {
 
 	public function getDuration() {
 		if ($elements = $this->find('.d-grid-aside')) {
-			return $this->findNextNodeByText($elements[0], 'Durée')->text();
+			if ($e = $this->findNextNodeByText($elements[0], 'Durée')) {
+				return $e->text();
+			}
 		} else {
 			throw new DocumentParsingException('duration');
 		}
+		return '';
 	}
 
 	public function getCountries($array = false) {
