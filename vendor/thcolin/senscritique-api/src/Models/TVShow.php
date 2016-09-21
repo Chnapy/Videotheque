@@ -12,8 +12,10 @@ class TVShow extends Oeuvre {
 		parent::__construct($json);
 
 		$this->saisons = array();
+		$this->path = array();
 
 		foreach ($json['saisons'] as $k => $v) {
+			$this->path[] = $v['path'];
 			$this->saisons[$k] = array(
 				"nom-saison" => $k,
 				"path" => $v['path'],
@@ -43,11 +45,15 @@ class TVShow extends Oeuvre {
 		return true;
 	}
 
-	public function isPathOk() {
-		foreach ($this->saisons as $s) {
-			if (!is_dir($s['path'])) {
-				return false;
+	public function isPathOk($path = null) {
+		if ($path === null) {
+			foreach ($this->saisons as $s) {
+				if (!is_dir($s['path'])) {
+					return false;
+				}
 			}
+		} else if (!is_dir($path)) {
+			return false;
 		}
 		return true;
 	}
@@ -56,7 +62,7 @@ class TVShow extends Oeuvre {
 		$ret = array();
 
 		foreach ($this->saisons as $s) {
-			$isset = $this->isPathOk();
+			$isset = $this->isPathOk($s['path']);
 			$ret[] = array(
 				"nom-saison" => $s['nom-saison'],
 				"langues" => $s['langues'],

@@ -24,7 +24,7 @@
 								</i>
 							</td>
 						</tr>
-						<tr><td class="gog-td-label">&emsp;<label for="ip_sc_cache_notes">Mais recharger les notes</label></td>
+						<tr><td class="gog-td-label">&emsp;<label for="ip_sc_cache_notes">Mais recharger les notes et affiches</label></td>
 							<td>
 								<i class="gog-checkbox <?php echo CFG::$cfg['sc_cache']['sauf_notes'] ? 'is-selected' : ''; ?>">
 									<input type="checkbox" name="sc_cache_sauf_notes" id="ip_sc_cache_notes" <?php echo CFG::$cfg['sc_cache']['sauf_notes'] ? 'checked' : ''; ?>>

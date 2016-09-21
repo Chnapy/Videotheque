@@ -1089,6 +1089,7 @@ input[disabled], button[disabled] {
     text-indent: 200%;
     text-overflow: clip;
     white-space: nowrap;
+	cursor: default;
 }
 
 .gog-active:after, .loadable:after, .spinner {
@@ -1123,7 +1124,7 @@ input[disabled], button[disabled] {
 	box-shadow: .475em 0 0 #000,.4725em -.0495em 0 rgba(0,0,0,.966667),.4645em -.099em 0 rgba(0,0,0,.933333),.452em -.147em 0 rgba(0,0,0,.9),.434em -.193em 0 rgba(0,0,0,.866667),.4115em -.2375em 0 rgba(0,0,0,.833333),.3845em -.279em 0 rgba(0,0,0,.8),.353em -.318em 0 rgba(0,0,0,.766667),.318em -.353em 0 rgba(0,0,0,.733333),.279em -.3845em 0 rgba(0,0,0,.7),.2375em -.4115em 0 rgba(0,0,0,.666667),.193em -.434em 0 rgba(0,0,0,.633333),.147em -.452em 0 rgba(0,0,0,.6),.099em -.4645em 0 rgba(0,0,0,.566667),.0495em -.4725em 0 rgba(0,0,0,.533333),0 -.475em 0 rgba(0,0,0,.5),-.0495em -.4725em 0 rgba(0,0,0,.466667),-.099em -.4645em 0 rgba(0,0,0,.433333),-.147em -.452em 0 rgba(0,0,0,.4),-.193em -.434em 0 rgba(0,0,0,.366667),-.2375em -.4115em 0 rgba(0,0,0,.333333),-.279em -.3845em 0 rgba(0,0,0,.3),-.318em -.353em 0 rgba(0,0,0,.266667),-.353em -.318em 0 rgba(0,0,0,.233333),-.3845em -.279em 0 rgba(0,0,0,.2),-.4115em -.2375em 0 rgba(0,0,0,.166667),-.434em -.193em 0 rgba(0,0,0,.133333),-.452em -.147em 0 rgba(0,0,0,.1),-.4645em -.099em 0 rgba(0,0,0,.0666667),-.4725em -.0495em 0 rgba(0,0,0,.0333333),-.475em 0 0 transparent;
 }
 
-.gog-active:after, .loadable.l-white:after, .spinner.l-white {
+.gog-active:after, .loadable.l-white:after, .spinner.l-white, .gog-btn:hover::after {
     box-shadow: 0.475em 0em 0 #fff,0.4725em -0.0495em 0 rgba(255,255,255,0.96667),0.4645em -0.099em 0 rgba(255,255,255,0.93333),0.452em -0.147em 0 rgba(255,255,255,0.9),0.434em -0.193em 0 rgba(255,255,255,0.86667),0.4115em -0.2375em 0 rgba(255,255,255,0.83333),0.3845em -0.279em 0 rgba(255,255,255,0.8),0.353em -0.318em 0 rgba(255,255,255,0.76667),0.318em -0.353em 0 rgba(255,255,255,0.73333),0.279em -0.3845em 0 rgba(255,255,255,0.7),0.2375em -0.4115em 0 rgba(255,255,255,0.66667),0.193em -0.434em 0 rgba(255,255,255,0.63333),0.147em -0.452em 0 rgba(255,255,255,0.6),0.099em -0.4645em 0 rgba(255,255,255,0.56667),0.0495em -0.4725em 0 rgba(255,255,255,0.53333),0em -0.475em 0 rgba(255,255,255,0.5),-0.0495em -0.4725em 0 rgba(255,255,255,0.46667),-0.099em -0.4645em 0 rgba(255,255,255,0.43333),-0.147em -0.452em 0 rgba(255,255,255,0.4),-0.193em -0.434em 0 rgba(255,255,255,0.36667),-0.2375em -0.4115em 0 rgba(255,255,255,0.33333),-0.279em -0.3845em 0 rgba(255,255,255,0.3),-0.318em -0.353em 0 rgba(255,255,255,0.26667),-0.353em -0.318em 0 rgba(255,255,255,0.23333),-0.3845em -0.279em 0 rgba(255,255,255,0.2),-0.4115em -0.2375em 0 rgba(255,255,255,0.16667),-0.434em -0.193em 0 rgba(255,255,255,0.13333),-0.452em -0.147em 0 rgba(255,255,255,0.1),-0.4645em -0.099em 0 rgba(255,255,255,0.06667),-0.4725em -0.0495em 0 rgba(255,255,255,0.03333);
 }
 
@@ -1330,4 +1331,9 @@ footer {
     font-weight: bold;
     cursor: default;
     max-width: 56px;
+}
+
+.gog-btn.load {
+	position: relative;
+	overflow: visible;
 }

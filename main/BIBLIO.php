@@ -171,5 +171,15 @@ class BIBLIO {
 		}
 		return false;
 	}
+	
+	static function removeById($id) {
+		for($i = 0; $i < count(self::$biblio); $i++) {
+			if (intval(self::$biblio[$i]['id']) === $id) {
+				unset(self::$biblio[$i]);
+				return self::submit();
+			}
+		}
+		return false;
+	}
 
 }

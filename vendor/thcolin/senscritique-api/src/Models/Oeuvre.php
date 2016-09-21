@@ -202,7 +202,7 @@ class Oeuvre {
 		return 0;
 	}
 
-	public function isPathOk() {
+	public function isPathOk($path = null) {
 		
 	}
 

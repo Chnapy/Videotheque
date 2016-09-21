@@ -13,6 +13,7 @@
 	margin: 30px 15px;
 	margin-bottom: 0;
 	text-align: left;
+	z-index: 0;
 	-webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;

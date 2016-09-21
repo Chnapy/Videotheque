@@ -13,7 +13,7 @@ class Movie extends Oeuvre {
 		$this->path = trim($json['path']);
 	}
 
-	public function isPathOk() {
+	public function isPathOk($path = null) {
 		return is_file($this->path);
 	}
 

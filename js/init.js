@@ -5,6 +5,7 @@ function onLoad() {
 	sc_init();
 	recherche_init();
 	form_init();
+	initVitrine();
 
 	if (cfg['first_use']) {
 		firstInit();

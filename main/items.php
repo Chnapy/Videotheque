@@ -56,6 +56,15 @@ switch ($_POST['f']) {
 	case "load":
 		load();
 		break;
+	case "actu":
+		loadAndRedoCache();
+		break;
+	case "modif":
+		modif();
+		break;
+	case "supp":
+		supprimerOeuvre();
+		break;
 	case "offline":
 		$id = intval($_POST['id']);
 		$item = Oeuvre::constructOeuvre(BIBLIO::getById($id));
@@ -94,6 +103,41 @@ function getDataFromString($f, $id) {
 	echo json_encode($data);
 }
 
+function modif() {
+	$id = intval($_POST['id']);
+	$json = BIBLIO::getById($id);
+	$item = Oeuvre::constructOeuvre($json);
+	parse_str($_POST['p'], $p);
+//	var_dump($p);
+
+	$json['sc'] = $p['lien_sc'];
+	$i = 0;
+	if ($item->isSerie()) {
+		foreach ($json['saisons'] as $key => $value) {
+			$json['saisons'][$key]['path'] = $p['path'][$i];
+			$json['saisons'][$key]['langues'] = @split(",", str_replace(" ", "", $p['langues'][$i]));
+			$json['saisons'][$key]['sub'] = @split(",", str_replace(" ", "", $p['sub'][$i]));
+			$i++;
+		}
+//		for ($i = 0; $i < count($json['saisons']); $i++) {
+//			$json['saisons'][$i]['path'] = $p['path'][$i];
+//			$json['saisons'][$i]['langues'] = @split(",", str_replace(" ", "", $p['langues'][$i]));
+//			$json['saisons'][$i]['sub'] = @split(",", str_replace(" ", "", $p['sub'][$i]));
+//		}
+	} else {
+		$json['path'] = $p['path'][0];
+		$json['langues'] = @split(",", str_replace(" ", "", $p['langues'][0]));
+		$json['sub'] = @split(",", str_replace(" ", "", $p['sub'][0]));
+	}
+	BIBLIO::writeById($id, $json);
+	load();
+}
+
+function supprimerOeuvre() {
+	$id = intval($_POST['id']);
+	echo BIBLIO::removeById($id);
+}
+
 function details() {
 	$id = intval($_POST['id']);
 	$params = $_POST['params'];
@@ -111,6 +155,24 @@ function load() {
 			$json['sc_cache']['last_load'] = time();
 			BIBLIO::writeById($id, $json);
 		}
+		$arr = $json['sc_cache'] + getOfflineData($item);
+	} else {
+		$arr = getOfflineData($item) + getDetailsData($item) + getFrontData($item);
+	}
+//	var_dump($arr);
+	echo json_encode($arr);
+}
+
+function loadAndRedoCache() {
+	$id = intval($_POST['id']);
+	$json = BIBLIO::getById($id);
+	$item = Oeuvre::constructOeuvre($json);
+
+	unset($json['sc_cache']);
+	if (CFG::$cfg['sc_cache']['active']) {
+		$json['sc_cache'] = getDetailsData($item) + getFrontData($item);
+		$json['sc_cache']['last_load'] = time();
+		BIBLIO::writeById($id, $json);
 		$arr = $json['sc_cache'] + getOfflineData($item);
 	} else {
 		$arr = getOfflineData($item) + getDetailsData($item) + getFrontData($item);

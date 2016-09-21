@@ -225,7 +225,7 @@
 	white-space: normal;
 }
 
-#fiche .o-tags .tag {
+#fiche .o-tags .tag, .modif-fiche .gog-btn {
 	background: #dfdfdf;
 }
 
@@ -697,4 +697,21 @@
 .fiche-toright-titre {
 	display: none;
 	margin-right: 10px;
+}
+
+.modif-fiche {
+	float: right;
+}
+
+.modif-fiche .gog-btn {
+	display: inline-block;
+	min-width: auto;
+	width: 26px;
+	height: 26px;
+}
+
+.modif-fiche .gog-btn * {
+	position: relative;
+	top: 1px;
+	vertical-align: middle;
 }

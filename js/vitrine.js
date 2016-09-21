@@ -18,6 +18,10 @@ function Oeuvre(json) {
 
 	this.loadJSON(json);
 
+	this.isFilm = function () {
+		return this.type1 === 'film';
+	};
+
 	this.afficheToTxt = function () {
 		return this.affiche == null ? 'img/affiche_default.png' : this.affiche;
 	};
@@ -269,6 +273,13 @@ function Oeuvre(json) {
 	};
 }
 
+function initVitrine() {
+	$('#fiche-param-form').on('submit', function (e) {
+		e.preventDefault();
+		modifierFiche($(this));
+	});
+}
+
 function loadall() {
 	collection = [];
 	sagas = [];
@@ -316,9 +327,9 @@ function loadItem(item) {
 	var oeuvre = new Oeuvre(item);
 	var isset = collection[oeuvre.id] != null;
 	collection[oeuvre.id] = oeuvre;
+	addOeuvre(oeuvre);
 	if (!isset) {
 		add_options(oeuvre);
-		addOeuvre(oeuvre);
 	}
 }
 
@@ -370,7 +381,11 @@ function addOeuvre(o) {
 			</div>\n\
 		</div>';
 
-	$("#content-body").append(content);
+	if ($('#oeuvre-' + o.id).length > 0) {
+		$('#oeuvre-' + o.id).replaceWith(content);
+	} else {
+		$("#content-body").append(content);
+	}
 	return true;
 }
 
@@ -410,6 +425,41 @@ function toFiche(id) {
 	fiche_id = id;
 	var o = collection[id];
 
+	console.debug(o);
+
+	$('#fiche-param-liensc').val(o.lien_sc);
+	$('#fiche-param-content').html('');
+
+	var params = [], head;
+	if (o.isFilm()) {
+		params.push(['', o.path, o.langues, o.sub]);
+	} else {
+		for (var i = 0; i < o.videos.length; i++) {
+			var nom_saison, path, langues, sub;
+			nom_saison = o.videos[i]['nom-saison'];
+			path = o.path[i];
+			langues = o.videos[i].langues;
+			sub = o.videos[i].sub;
+			params.push([nom_saison, path, langues, sub]);
+		}
+	}
+	for (var i = 0; i < params.length; i++) {
+		$('#fiche-param-content').append('<table class="gog-table">\n\
+				<tbody>\n\
+					' + (o.isFilm() ? '' : ('<tr><th>Saison ' + params[i][0] + '</th><th></th></tr>')) + '\n\
+					<tr><td class="gog-td-label">Langues</td>\n\
+						<td><input type="text" name="langues[]" class="gog-input" required value="' + params[i][2] + '"></td>\n\
+					</tr>\n\
+					<tr><td class="gog-td-label">Sous-titres</td>\n\
+						<td><input type="text" name="sub[]" class="gog-input" value="' + params[i][3] + '"></td>\n\
+					</tr>\n\
+					<tr><td class="gog-td-label">Chemin</td>\n\
+						<td><input type="text" name="path[]" class="gog-input" required value="' + params[i][1] + '"></td>\n\
+					</tr>\n\
+				</tbody>\n\
+			</table>');
+	}
+
 	$('#fiche-back').hide();
 	$('#fiche').removeClass("o-serie");
 	$('#fiche').removeClass("o-film");
@@ -431,7 +481,6 @@ function toFiche(id) {
 	$("#fiche .o-manote").html(o.maNoteToTxt());
 	$("#fiche .o-tags").html(o.tagsToTxt());
 
-//	$("#fiche .loadable").addClass('load');
 	$("#fiche .title-main .redirect-sc").hide();
 	$("#fiche .saga-head .redirect-sc").hide();
 	$('#fiche .synopsis').show();
@@ -560,4 +609,42 @@ function setFicheSaga(saga) {
 
 	}
 	$('#fiche .saga').removeClass('load');
+}
+
+function actualiserFiche() {
+	var id = fiche_id;
+	$('#fiche .fiche-actu').addClass('load');
+	myPost("index.php", {m: "items", f: "actu", id: id}, function (data) {
+		loadItem(data);
+		fiche_id = -1;
+		toFiche(id);
+		$('#fiche .fiche-actu').removeClass('load');
+	}, "json");
+}
+
+function supprimerFiche() {
+	var id = fiche_id;
+	$('#fiche-supp-form .gog-btn-big').addClass('load');
+	myPost("index.php", {m: "items", f: "supp", id: id}, function (data) {
+		smooth_hide($('#fiche-supp-modal'));
+		$('#oeuvre-' + id).remove();
+		collection.splice(id, 1);
+		fiche_id = -1;
+		toVitrine();
+		$('#fiche-supp-form .gog-btn-big').removeClass('load');
+	}, "json");
+}
+
+function modifierFiche(form) {
+	var packet = $(form).serialize();
+
+	var id = fiche_id;
+	$('#fiche-param-form .gog-btn-big').addClass('load');
+	myPost("index.php", {m: "items", f: "modif", id: id, p: packet}, function (data) {
+		smooth_hide($('#fiche-param-modal'));
+		loadItem(data);
+		fiche_id = -1;
+		toFiche(id);
+		$('#fiche-param-form .gog-btn-big').removeClass('load');
+	}, "json");
 }

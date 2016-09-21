@@ -6,7 +6,14 @@
 		<div id="fiche-over"></div>
 	</div>
 	<div id="fiche-content">
-		<button class="gog-btn bout-retour" onclick="toVitrine();"><span class="fui-arrow-left"></span></button>
+		<div class="sup-header">
+			<button class="gog-btn bout-retour" onclick="toVitrine();"><span class="fui-arrow-left"></span></button>
+			<div class="modif-fiche">
+				<span class="gog-btn fiche-actu loadable" onclick="actualiserFiche();"><span class="glyphicon glyphicon-refresh"></span></span>
+				<span class="gog-btn fiche-params loadable" onclick="smooth_show($('#fiche-param-modal'));"><span class="fui-gear"></span></span>
+				<span class="gog-btn fiche-supp loadable" onclick="smooth_show($('#fiche-supp-modal'));"><span class="fui-cross"></span></span>
+			</div>
+		</div>
 		<div class="row header">
 			<div class="col-md-10">
 				<div class="title-head bloc">
@@ -94,5 +101,45 @@
 		</div>
 		<button class="fiche-toleft smooth gog-btn-big"><span class="fui-arrow-left"></span><span class="fiche-toleft-titre"></span></button>
 		<button class="fiche-toright smooth gog-btn-big"><span class="fiche-toright-titre"></span><span class="fui-arrow-right"></span></button>
+	</div>
+</div>
+
+<div class="gog-modal smooth hide2" id="fiche-supp-modal">
+
+	<div class="gog-form module smooth" id='fiche-supp-form'>
+		<button class="gog-modal-close" data-action="close"><i class="fui-cross"></i></button>
+		<h2 class="gog-form-title">
+			Supprimer l'oeuvre
+		</h2>
+		<div class='gog-form-description'>
+			Action irrémédiable.
+			<br/>Les fichiers ne seront pas impactés.
+		</div>
+		<div class="gog-field">
+			<button class="gog-btn-big gog-active" onclick='supprimerFiche();'>Supprimer l'oeuvre</button>
+		</div>
+	</div>
+</div>
+
+<div class="gog-modal smooth hide2" id="fiche-param-modal">
+	<div class="module gog-form">
+		<button class="gog-modal-close" data-action="close"><i class="fui-cross"></i></button>
+		<form id='fiche-param-form'>
+			<h2 class="gog-form-title">
+				Paramètres de l'oeuvre
+			</h2>
+			<table class="gog-table">
+				<tbody>
+					<tr><td class="gog-td-label">Lien Senscritique</td>
+						<td><input type="url" name="lien_sc" class="gog-input" required id='fiche-param-liensc'></td>
+					</tr>
+				</tbody>
+			</table>
+			<div id='fiche-param-content'>
+			</div>
+			<div class="gog-field">
+				<button type='submit' class="gog-btn-big gog-active">Effectuer les modifications</button>
+			</div>
+		</form>
 	</div>
 </div>
