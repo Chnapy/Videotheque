@@ -1345,3 +1345,7 @@ footer {
 	position: relative;
 	overflow: visible;
 }
+
+.bg_uni {
+	background: #ccc !important;
+}

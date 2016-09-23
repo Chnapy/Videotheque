@@ -23,6 +23,7 @@
 		]
 	},
 	"filtre_pos": 2,
+	"bg_uni": false,
 	"tri": "id",
 	"affichage": "list2",
 	"sc_check_interval": 0,

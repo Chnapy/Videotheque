@@ -71,6 +71,13 @@
 								</div>
 							</td>
 						</tr>
+						<tr><td class="gog-td-label"><label for="ip_bg">Utiliser un fond à couleur unie (#ccc)</label></td>
+							<td>
+								<i class="gog-checkbox <?php echo CFG::$cfg['bg_uni'] ? 'is-selected' : ''; ?>">
+									<input type="checkbox" name="bg_uni" id="ip_bg" <?php echo CFG::$cfg['bg_uni'] ? 'checked' : ''; ?>>
+								</i>
+							</td>
+						</tr>
 						<tr><td class="gog-td-label"><label for="ip_first">Afficher la page d'aide au démarrage</label></td>
 							<td>
 								<i class="gog-checkbox <?php echo CFG::$cfg['first_use'] ? 'is-selected' : ''; ?>">

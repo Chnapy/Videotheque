@@ -62,6 +62,7 @@ function params() {
 			if (isset($form['filtre_pos'])) {
 				CFG::$cfg['filtre_pos'] = intval($form['filtre_pos']);
 			}
+			CFG::$cfg['bg_uni'] = (isset($form['bg_uni']) && $form['bg_uni'] === 'on');
 			CFG::$cfg['first_use'] = (isset($form['first_use']) && $form['first_use'] === 'on');
 			break;
 		case 'vlc':
