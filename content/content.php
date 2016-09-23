@@ -4,8 +4,9 @@
 <div id="content" class="smooth">
 	<div id="content-header" class="">
 		<div id="content-header-top" class="cf">
-			<button id='load_btn' class='gog-btn gog-active' onclick="loadall();">Charger les oeuvres</button>
+			<button id='load_btn' class='gog-btn loadable gog-active' onclick="loadall();">Charger les oeuvres</button>
 			<h1 class="content-header-top-title"><span class="loadable load-oeuvre l-text"></span><span class="nbr_oeuvres"></span><span class="nbr_total_oeuvres"></span> FILMS & SERIES</h1>
+			
 			<div class="content-header-top-right">
 				<div class="content-header-top-item dropdown-back" data-function="setAffichage" id="dropdown-affichage">
 					AFFICHAGE :

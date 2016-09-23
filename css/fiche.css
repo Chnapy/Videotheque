@@ -225,10 +225,6 @@
 	white-space: normal;
 }
 
-#fiche .o-tags .tag, .modif-fiche .gog-btn {
-	background: #dfdfdf;
-}
-
 #fiche .o-notes {
 	position: relative;
 	right: 0;
@@ -275,6 +271,7 @@
 .list-video {
 	white-space: nowrap;
 	overflow-x: overlay;
+	overflow-y: hidden;
 	padding-bottom: 20px;
 	height: 100px;
 }

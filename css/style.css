@@ -484,6 +484,7 @@ input[disabled], button[disabled] {
 
 #content-body {
 	min-height: 600px;
+	padding-bottom: 30px;
 }
 
 .bloc {
@@ -933,7 +934,7 @@ input[disabled], button[disabled] {
 	display: none;
     float: left;
     margin: 0;
-    line-height: inherit;
+    line-height: 23px;
     color: #262626;
     font-weight: 600;
     font-size: inherit;
@@ -1294,7 +1295,14 @@ footer {
 }
 
 #load_btn {
-	position: absolute;
+	float: left;
+	overflow: hidden;
+	min-width: auto;
+	margin-right: 10px;
+}
+
+#load_btn.load {
+	width: 28px;
 }
 
 #first-modal {

@@ -2,6 +2,16 @@
 var affichage;
 var tri;
 
+function cleanAndAddAllCollection() {
+	var clone = collection.slice();
+	clone.sort(getCompareFct());
+	
+	$("#content-body").html("");
+	for (var i = 0; i < clone.length; i++) {
+		addOeuvre(clone[i]);
+	}
+}
+
 function setAffichage(classe) {
 	if (affichage != null && affichage === classe) {
 		return;
@@ -55,15 +65,8 @@ function setTri(_tri) {
 	}
 	myPost("index.php", {m: "init", f: "tri", v: tri}, function (data) {
 	}, "json");
-	
-	var clone = collection.slice();
-	clone.sort(getCompareFct());
-//	console.debug(clone);
 
-	$("#content-body").html("");
-	for (var i = 0; i < clone.length; i++) {
-		addOeuvre(clone[i]);
-	}
+	cleanAndAddAllCollection();
 }
 
 function getCompareFct() {

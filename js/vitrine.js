@@ -68,7 +68,7 @@ function Oeuvre(json) {
 		if (this.manote == null) {
 			return sc_error_HTML;
 		}
-		if (!this.manote['is_connecte']) {
+		if (!profile.connected) {
 			return '<span class="sc_icon sc_icon_none"></span>';
 		}
 		var main, sec = '';
@@ -284,10 +284,11 @@ function loadall() {
 	collection = [];
 	sagas = [];
 	is_loadAll = true;
-	$("#load_btn").hide();
 	$('.content-header-top-title').show();
 	$("#content-body").html("");
-	$('.load-oeuvre').addClass('load');
+	$('#load_btn').removeClass('gog-active');
+	$('#load_btn').addClass('load');
+	$('#load_btn').attr('disabled', true);
 
 	myPost("index.php", {m: "items", f: "init"}, function (data) {
 		if (data === false) {
@@ -302,7 +303,8 @@ function loadall() {
 function load(i, tab) {
 	if (tab[i] == null) {
 		$('.nbr_oeuvres').html('');
-		$('.load-oeuvre').removeClass('load');
+		$('#load_btn').removeClass('load');
+		$('#load_btn').attr('disabled', false);
 		if (cfg['sc_cache']['sauf_notes']) {
 			loadNotesForAll(profile.connected);
 		}
@@ -327,22 +329,17 @@ function loadItem(item) {
 	var oeuvre = new Oeuvre(item);
 	var isset = collection[oeuvre.id] != null;
 	collection[oeuvre.id] = oeuvre;
-	addOeuvre(oeuvre);
+//	addOeuvre(oeuvre);
 	if (!isset) {
 		add_options(oeuvre);
 	}
+	cleanAndAddAllCollection();
 }
 
-function addOeuvre(o) {
-	if (!oeuvreRespectSearch(o)) {
-		if (o != null)
-			console.debug(o);
-		return false;
-	}
-
+function getOeuvreContent(o) {
 	var txt_file_isset = o.file_isset ? 'hide' : '';
 
-	var content = '<div id="oeuvre-' + o.id + '" class="oeuvre smooth ' + o.typesToTxt() + ' fadein">\n\
+	return '<div id="oeuvre-' + o.id + '" class="oeuvre ' + o.typesToTxt() + '">\n\
 			<div class="o-real">\n\
 				' + o.realToTxt() + '' + o.acteursToTxt() + '\n\
 			</div>\n\
@@ -380,6 +377,16 @@ function addOeuvre(o) {
 				</div>\n\
 			</div>\n\
 		</div>';
+}
+
+function addOeuvre(o) {
+	if (!oeuvreRespectSearch(o)) {
+		if (o != null)
+			console.debug(o);
+		return false;
+	}
+	
+	var content = getOeuvreContent(o);
 
 	if ($('#oeuvre-' + o.id).length > 0) {
 		$('#oeuvre-' + o.id).replaceWith(content);
@@ -497,39 +504,19 @@ function loadDetails(o) {
 	var isFilm = o.type1 === 'film';
 
 	$('#fiche .title-sec').html(o.titre_sec);
-//	$('#fiche .title-sec').removeClass('load');
 
 	$('#fiche .pays').html(o.paysToTxt());
-//	$('#fiche .pays').removeClass('load');
 
 	if (o.synopsis === '') {
 		$('#fiche .synopsis').hide();
 	} else {
 		$('#fiche .synopsis .contenu').html(o.synopsis);
 	}
-//	$('#fiche .synopsis').removeClass('load');
 
 	$('#fiche .title-main .redirect-sc').attr("href", o.lien_sc);
 	$('#fiche .title-main .redirect-sc').show();
 	if (o.has_saga) {
 		setFicheSaga(o.saga);
-//		var post = true;
-//		for (var i = 0; i < sagas.length; i++) {
-//			for (var j = 0; (sagas[i] != null) && (j < sagas[i]['content'].length); j++) {
-//				if (sagas[i]['content'][j]['b_id'] === o.id) {
-//					setFicheSaga(o.sagas);
-//					j = sagas[i]['content'].length;
-//					i = sagas.length;
-//					post = false;
-//				}
-//			}
-//		}
-//		if (post) {
-//			myPost("index.php", {m: "items", f: "details", id: o.id, params: ["saga"]}, function (data) {
-//				sagas.push(data["saga"]);
-//				setFicheSaga(data["saga"]);
-//			}, "json");
-//		}
 	}
 	$("#fiche .visionnage").html(o.videosToTxt());
 	initExplorer();
@@ -546,30 +533,6 @@ function loadDetails(o) {
 		$('#fiche .trailer-box').show();
 	}
 }
-
-//function loadAndApply(item, param, func) {
-//	if (item[param] == null) {
-//		myPost("index.php", {m: "items", f: "details", id: item['id'], params: [param]}, function (data) {
-//			item[param] = (data[param] == null ? '' : data[param]);
-//			if (item['id'] === fiche_id) {
-//				loadAndApply(item, param, func);
-//			}
-//		}, "json");
-//	} else {
-//		func(item[param]);
-//	}
-//}
-
-//function loadAndApplyNotFiche(item, param, func) {
-//	if (item[param] == null) {
-//		myPost("index.php", {m: "items", f: "details", id: item['id'], params: [param]}, function (data) {
-//			item[param] = (data[param] == null ? '' : data[param]);
-//			loadAndApplyNotFiche(item, param, func);
-//		}, "json");
-//	} else {
-//		func(item[param]);
-//	}
-//}
 
 function setFicheSaga(saga) {
 	$('#fiche .saga-head .saga-head-txt').html(saga["titre"]['text']);
