@@ -35,7 +35,8 @@ function Oeuvre(json) {
 	this.titreToTxt = function () {
 		if (this.titre == null)
 			return this.lien_sc.split('/')[4];
-		return this.titre;
+
+		return (cfg['titre_vo'] && this.titre_sec != null) ? this.titre_sec : this.titre;
 	};
 
 	this.typesToTxt = function () {
@@ -385,7 +386,7 @@ function addOeuvre(o) {
 			console.debug(o);
 		return false;
 	}
-	
+
 	var content = getOeuvreContent(o);
 
 	if ($('#oeuvre-' + o.id).length > 0) {
@@ -503,7 +504,7 @@ function toFiche(id) {
 function loadDetails(o) {
 	var isFilm = o.type1 === 'film';
 
-	$('#fiche .title-sec').html(o.titre_sec);
+	$('#fiche .title-sec').html((cfg['titre_vo'] && o.titre_sec != null) ? o.titre : o.titre_sec);
 
 	$('#fiche .pays').html(o.paysToTxt());
 

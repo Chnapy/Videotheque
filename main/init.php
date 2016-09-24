@@ -58,6 +58,7 @@ function params() {
 			Client::setTimeout(CFG::$cfg['curl_timeout']);
 			CFG::$cfg['sc_cache']['active'] = (isset($form['sc_cache_active']) && $form['sc_cache_active'] === 'on');
 			CFG::$cfg['sc_cache']['sauf_notes'] = (isset($form['sc_cache_sauf_notes']) && $form['sc_cache_sauf_notes'] === 'on');
+			CFG::$cfg['titre_vo'] = (isset($form['titre_vo']) && $form['titre_vo'] === 'on');
 			CFG::$cfg['curseur_load'] = (isset($form['curseur_load']) && $form['curseur_load'] === 'on');
 			if (isset($form['filtre_pos'])) {
 				CFG::$cfg['filtre_pos'] = intval($form['filtre_pos']);

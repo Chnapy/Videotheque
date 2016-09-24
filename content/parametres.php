@@ -31,6 +31,13 @@
 								</i>
 							</td>
 						</tr>
+						<tr><td class="gog-td-label"><label for="ip_titre_vo">Afficher les titres originaux quand disponibles</label></td>
+							<td>
+								<i class="gog-checkbox <?php echo CFG::$cfg['titre_vo'] ? 'is-selected' : ''; ?>">
+									<input type="checkbox" name="titre_vo" id="ip_titre_vo" <?php echo CFG::$cfg['titre_vo'] ? 'checked' : ''; ?>>
+								</i>
+							</td>
+						</tr>
 						<tr><td class="gog-td-label">Timeout des requêtes Senscritique, en ms (ou 0 pour aucune limite de temps)</td>
 							<td><input type="number" name="curl_timeout" class="gog-input" required value=<?php echo CFG::$cfg['curl_timeout']; ?>></td>
 						</tr>
