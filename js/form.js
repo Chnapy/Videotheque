@@ -41,8 +41,8 @@ function setParams(_cfg) {
 	} else if ($.active > 0) {
 		$('body').addClass('wait');
 	}
-	
-	if(cfg['bg_uni']) {
+
+	if (cfg['bg_uni']) {
 		$('#all').addClass('bg_uni');
 	} else {
 		$('#all').removeClass('bg_uni');
