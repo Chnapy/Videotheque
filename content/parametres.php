@@ -71,7 +71,7 @@
 								</div>
 							</td>
 						</tr>
-						<tr><td class="gog-td-label"><label for="ip_bg">Utiliser un fond à couleur unie (#ccc)</label></td>
+						<tr><td class="gog-td-label"><label for="ip_bg">Utiliser un fond à couleur unie (gris)</label></td>
 							<td>
 								<i class="gog-checkbox <?php echo CFG::$cfg['bg_uni'] ? 'is-selected' : ''; ?>">
 									<input type="checkbox" name="bg_uni" id="ip_bg" <?php echo CFG::$cfg['bg_uni'] ? 'checked' : ''; ?>>
