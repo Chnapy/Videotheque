@@ -230,6 +230,8 @@ function scan() {
 		var i, d, dir, lastIndex;
 		for (i = 0; i < data['failed'].length; i++) {
 			d = data['failed'][i];
+			if(d == null)
+				continue;
 			var item = [];
 			item["path"] = d;
 			try {
@@ -252,6 +254,8 @@ function scan() {
 		}
 		for (i = 0; i < data['item'].length; i++) {
 			d = data['item'][i];
+			if(d == null)
+				continue;
 			var item = [];
 			item["id"] = i;
 			item["path"] = d;

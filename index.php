@@ -8,7 +8,7 @@ use jyggen\Curl\Exception\CurlErrorException;
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 //register_shutdown_function('shutDownFunction');
-session_start();
+@session_start();
 
 require_once 'main/include.php';
 

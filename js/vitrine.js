@@ -209,7 +209,7 @@ function Oeuvre(json) {
 			if (i > 0) {
 				txt_pays += ", ";
 			}
-			txt_pays += '<a href="#">' + this.pays[i] + '</a>';
+			txt_pays += '<span class="a" onclick="search_pays([[\'' + this.pays[i] + '\', true]]);">' + this.pays[i] + '</span>';
 		}
 
 		return txt_pays;

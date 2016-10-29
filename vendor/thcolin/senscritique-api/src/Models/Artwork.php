@@ -162,7 +162,11 @@ class Artwork {
 		$countries = [];
 
 		if ($elements = $this->find('.d-grid-aside')) {
-			foreach ($this->findNextNodeByText($elements[0], 'Pays d\'origine')->find('li') as $element) {
+			$pays = $this->findNextNodeByText($elements[0], 'Pays d\'origine');
+			if (!$pays) {
+				return '';
+			}
+			foreach ($pays->find('li') as $element) {
 				$countries[] = $element->text();
 			}
 		} else {
