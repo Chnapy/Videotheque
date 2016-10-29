@@ -89,7 +89,7 @@ class OeuvreFace {
 	public function getBackAffiche() {
 		if ($elements = $this->find('.pvi-hero[style]')) {
 			$item = $elements[0]->getAttribute("style", "");
-			return strstr(strstr($item, 'http://'), ');', true);
+			return strstr(strstr($item, 'https://'), ');', true);
 		} else {
 			return "";
 		}
