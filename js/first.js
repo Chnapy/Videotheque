@@ -1,7 +1,7 @@
 
 
 function firstInit() {
-	smooth_show($('#first-modal'));
+	smooth_show($('#first'));
 
 }
 
@@ -14,7 +14,6 @@ function firstNext() {
 		$('.first2').hide();
 		$('.first3').show();
 		$('.first3 button').click(function () {
-			$('#first').hide();
 			loadall();
 		});
 	});

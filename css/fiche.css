@@ -19,6 +19,7 @@
 #fiche-content {
 	position: relative;
 	padding: 10px 56px;
+	min-height: 100vh;
 }
 
 #fiche-back {

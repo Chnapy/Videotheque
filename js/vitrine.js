@@ -282,6 +282,7 @@ function initVitrine() {
 }
 
 function loadall() {
+	$('#first').hide();
 	collection = [];
 	sagas = [];
 	is_loadAll = true;

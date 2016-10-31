@@ -78,7 +78,7 @@
 </div>
 */ ?>
 
-<div id='first'>
+<div id='first' class='hide2'>
 	<div class="smooth module gog-form">
 		<h2 class="gog-form-title">
 			Premier démarrage

@@ -74,7 +74,8 @@ class OeuvreFace {
 		if ($elements = $this->find('.pvi-hero .pvi-scrating-value[itemprop="ratingValue"]')) {
 			return $elements[0]->text();
 		} else {
-			throw new DocumentParsingException('moyenne');
+			return '';
+//			throw new DocumentParsingException('moyenne');
 		}
 	}
 
