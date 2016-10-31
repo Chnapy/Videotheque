@@ -464,7 +464,7 @@ input[disabled], button[disabled] {
 	background: linear-gradient(to bottom, #ccc 0%, rgba(204, 204, 204, 0) 100%);
 }
 
-#all #content-header, #all #content-body, #all #fiche {
+#all #content-header, #all #content-body, #all #fiche, #all #first {
 	padding-left: 56px;
 	padding-right: 56px;
 }
@@ -483,7 +483,7 @@ input[disabled], button[disabled] {
 }
 
 #content-body {
-	min-height: 600px;
+	/*min-height: 600px;*/
 	padding-bottom: 30px;
 }
 
@@ -1338,7 +1338,8 @@ footer {
     color: #e5e5e5;
     font-weight: bold;
     cursor: default;
-    max-width: 56px;
+	width: 56px;
+    text-align: center;
 }
 
 .gog-btn.load {
@@ -1348,4 +1349,18 @@ footer {
 
 .bg_uni {
 	background: #ccc !important;
+}
+
+#first {
+	padding-top: 30px;
+}
+
+#first .module {
+	margin: auto;
+	width: 100%;
+	max-width: 800px;
+}
+
+#first .gog-form-title {
+	margin: 0;
 }

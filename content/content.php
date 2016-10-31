@@ -6,7 +6,7 @@
 		<div id="content-header-top" class="cf">
 			<button id='load_btn' class='gog-btn loadable gog-active' onclick="loadall();">Charger les oeuvres</button>
 			<h1 class="content-header-top-title"><span class="loadable load-oeuvre l-text"></span><span class="nbr_oeuvres"></span><span class="nbr_total_oeuvres"></span> FILMS & SERIES</h1>
-			
+
 			<div class="content-header-top-right">
 				<div class="content-header-top-item dropdown-back" data-function="setAffichage" id="dropdown-affichage">
 					AFFICHAGE :
@@ -19,7 +19,6 @@
 						<span class="dropdown-back-items">
 							<span class="dropdown-back-item" data-value="list1"><span class="fui-list-columned"></span></span>
 							<span class="dropdown-back-item" data-value="list2"><span class="fui-list-small-thumbnails"></span></span>
-							<!--<span class="dropdown-back-item" data-value="list3"><span class="fui-list-large-thumbnails"></span></span>-->
 						</span>
 					</span>
 				</div>
@@ -62,7 +61,6 @@
 						<i class="glyphicon glyphicon-chevron-left"></i>
 						Autres filtres
 						<i class="glyphicon glyphicon-chevron-right"></i>
-						<!--<i class="fui-cross"></i>-->
 					</div>
 				</div>
 				<div class="filtre-dropdowns-container cf">
@@ -337,6 +335,7 @@
 			</div>
 		</div>
 	</div>
+	<?php require_once 'content/first.php'; ?>
 	<div id="content-body" class="smooth">
 	</div>
 </div>

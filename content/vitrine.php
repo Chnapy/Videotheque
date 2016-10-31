@@ -74,7 +74,7 @@ echo json_encode(CFG::$cfg);
 		</div>
 	</div>
 </nav>
-<span id='alpha'>ALPHA</span>
+<span id='alpha'>v0.2a</span>
 <!--<div class="nav-spacer"></div>-->
 <div id="all">
 	<?php require_once 'content/parametres.php'; ?>
@@ -87,5 +87,5 @@ echo json_encode(CFG::$cfg);
 
 	<?php require_once 'content/apropos.php'; ?>
 
-	<?php require_once 'content/first.php'; ?>
+	<?php // require_once 'content/first.php'; ?>
 </div>

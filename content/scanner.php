@@ -19,6 +19,7 @@
 					<span class="scan-error-files error">
 						<span class="scan-error-files-nbr"></span> fichiers n'ont pas pu être reconnu. <span class='a' onclick='showHideScan();'></span>.
 						<br/>Le scanner ne reconnait pas les fichiers possédant certains types de caractères (spéciaux, asiatiques ou arabes, ...).
+						<br/>Assurez-vous également de posséder les droits d'accès des fichiers concernés.
 					</span>
 				</div>
 			</div>

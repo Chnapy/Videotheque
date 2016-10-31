@@ -1,4 +1,6 @@
 
+/* global cfg */
+
 function onLoad() {
 	init();
 	ajax_init();
@@ -212,7 +214,7 @@ function scan() {
 		$('#scan_btn').removeClass('load');
 		$('#scanfini').show();
 		if (!data.success) {
-			$('#scanfini .scan-error-other').text("Scan de la bibliothèque impossible. Le chemin est-il correct ? A vérifier dans les paramètres.");
+			$('#scanfini .scan-error-other').text('Scan de la bibliothèque impossible. Le chemin est-il correct ? A vérifier <a onclick="smooth_show($(\'#param-modal\'));">dans vos paramètres</a>.');
 			return;
 		}
 

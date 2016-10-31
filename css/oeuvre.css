@@ -70,6 +70,7 @@
 	right: 10px;
 	top: 35px;
 	text-transform: uppercase;
+	pointer-events: none;
 }
 
 .o-no-file {

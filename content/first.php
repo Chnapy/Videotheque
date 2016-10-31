@@ -1,6 +1,6 @@
 
 
-
+<?php /*
 <div class="gog-modal smooth hide2 module gog-form" id="first-modal">
 		<button class="gog-modal-close" data-action="close"><i class="fui-cross"></i></button>
 		<h2 class="gog-form-title">
@@ -75,4 +75,50 @@
 			<br/>Faîtes-vous plaisir. Cette application a été créée dans ce but <span class="fui-heart"></span>
 		</div>
 		<img class='module-img' src='img/cine_popcorn.gif' alt=''/>
+</div>
+*/ ?>
+
+<div id='first'>
+	<div class="smooth module gog-form">
+		<h2 class="gog-form-title">
+			Premier démarrage
+		</h2>
+		<form action="#" method="POST" class='first-form first1'>
+			<p class="gog-form-description">
+				C'est rapide, promis !
+				<br/><br/>
+				Commençons par définir le chemin où se trouvent vos films et séries
+			</p>
+			<table class="gog-table">
+				<tbody>
+					<tr><td class="gog-td-label">Indiquez le répertoire cible du scanner</td>
+						<td><input type="text" name="biblio_path" class="gog-input" required value="<?php echo CFG::$cfg['biblio_path']; ?>"></td>
+					</tr>
+				</tbody>
+			</table>
+			<input type="hidden" name="biblio_cfg_path" value="<?php echo CFG::$cfg['biblio_cfg_path']; ?>">
+			<input type="hidden" name="vlc_path" value="<?php echo CFG::$cfg['vlc_path']; ?>">
+			<input type="hidden" name="explorer_path" value="<?php echo CFG::$cfg['explorer_path']; ?>">
+			<input type="hidden" name="cookie_path" value="<?php echo CFG::$cfg['cookie_path']; ?>">
+			<input type="hidden" name="param" value="path"/>
+			<div class="gog-field">
+				<button type="submit" class="gog-btn-big gog-active" onclick='firstNext();'>Passer à l'étape suivante <span class="fui-arrow-right"></span></button>
+			</div>
+			<p class="gog-form-description param-form-error error"></p>
+		</form>
+		<div class='first2' style='display: none;'>
+			<p class="gog-form-description">
+				Nous pouvons maintenant scanner l'ensemble de vos oeuvres
+			</p>
+			<button class='gog-btn-big'>Lancer le scanner</button>
+		</div>
+		<div class='first3' style='display: none;'>
+			<p class="gog-form-description">
+				Il ne reste plus qu'à charger vos films et séries !<br/>
+				N'oubliez pas d'aller faire un tour <a onclick="smooth_show($('#param-modal'));">dans vos paramètres</a>.<br/>
+				Et connectez vous à Senscritique !
+			</p>
+			<button class='gog-btn-big gog-active'>Charger les oeuvres & enjoy :)</button>
+		</div>
+	</div>
 </div>

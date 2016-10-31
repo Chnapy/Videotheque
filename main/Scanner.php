@@ -77,8 +77,9 @@ class Scanner {
 			return false;
 		}
 
-		$mime = mime_content_type($file);
+		$mime = @mime_content_type($file);
 		if (!strstr($mime, "video/")) {
+			self::$failed[] = $file;
 			return false;
 		}
 

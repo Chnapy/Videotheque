@@ -2,7 +2,7 @@
 var cfg;
 
 function form_init() {
-	$('#param-form, #vlc-form, #path-form, #config-form').each(function (e) {
+	$('#param-form, #vlc-form, #path-form, #config-form, .first-form').each(function (e) {
 		$(this).on('submit', function (e) {
 			e.preventDefault();
 			param_generic($(this));

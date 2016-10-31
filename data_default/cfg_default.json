@@ -10,7 +10,7 @@
 	"biblio_cfg_path": "data\/biblio.json",
 	"vlc_path": "",
 	"cookie_path": "cookie\/cookie.coo",
-	"explorer_path": "",
+	"explorer_path": "C:\/Windows\/explorer.exe",
 	"vlc_params": {
 		"fullscreen": false,
 		"play_auto": false,
